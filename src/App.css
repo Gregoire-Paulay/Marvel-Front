@@ -192,6 +192,8 @@ header > div:first-of-type {
   border-radius: 50%;
   width: 150px;
   cursor: pointer;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .comics-character > div:last-of-type {
@@ -211,6 +213,40 @@ header > div:first-of-type {
   width: 100%;
 }
 
+/* ---- PAGE Character-Info ---- */
+.character-info {
+  border: 3px solid brown;
+  padding: 40px;
+  display: flex;
+  gap: 30px;
+}
+.character-info > div:first-of-type {
+  border: 2px solid green;
+  width: 500px;
+}
+.character-info img {
+  width: 500px;
+  object-fit: cover;
+}
+
+.character-info > div:last-child {
+  border: 3px solid blue;
+  display: flex;
+  align-items: center;
+}
+.character-info > div:last-child > div {
+  border: 1px solid coral;
+  padding: 6px;
+  background-color: white;
+  border-radius: 5px;
+}
+.character-info span {
+  font-size: 18px;
+  font-weight: bold;
+}
+.character-info p {
+  margin: 8px 0;
+}
 /* ------------------------------ */
 /* ----------- FOOTER ----------- */
 /* ------------------------------ */

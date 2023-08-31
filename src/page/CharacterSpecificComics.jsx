@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import notSpiderMan from "../assets/no-spiderman.jpg";
+
 const CharacterSpecificComics = ({ darkMode }) => {
   const [comicsPerCharacter, setComicsPerCharacter] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +35,7 @@ const CharacterSpecificComics = ({ darkMode }) => {
         <div className="comics-character">
           <div>
             <h1>Comics ou le personnage {comicsPerCharacter.name} apparaît</h1>
-            <img
+            {/* <img
               src={
                 comicsPerCharacter.thumbnail.path +
                 "." +
@@ -41,9 +43,34 @@ const CharacterSpecificComics = ({ darkMode }) => {
               }
               alt={comicsPerCharacter.name}
               onClick={() => {
-                navigate("");
+                navigate("/character/" + comicsPerCharacter._id);
               }}
-            />
+            /> */}
+
+            {comicsPerCharacter.thumbnail.path ===
+              "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ||
+            comicsPerCharacter.thumbnail.path ===
+              "http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708" ? (
+              <img
+                src={notSpiderMan}
+                alt="Pas Spider-man"
+                onClick={() => {
+                  navigate("/character/" + comicsPerCharacter._id);
+                }}
+              />
+            ) : (
+              <img
+                src={
+                  comicsPerCharacter.thumbnail.path +
+                  "." +
+                  comicsPerCharacter.thumbnail.extension
+                }
+                alt={comicsPerCharacter.name}
+                onClick={() => {
+                  navigate("/character/" + comicsPerCharacter._id);
+                }}
+              />
+            )}
           </div>
 
           <div>
@@ -62,7 +89,7 @@ const CharacterSpecificComics = ({ darkMode }) => {
                     }
                     alt={comics.title}
                   />
-                  <p>{comics.description}</p>
+                  {/* <p>{comics.description}</p> */}
                 </div>
               );
             })}

@@ -9,6 +9,7 @@ import AllComics from "./page/AllComics";
 import Comic from "./page/Comic";
 import AllCharacters from "./page/AllCharacters";
 import CharacterSpecificComics from "./page/CharacterSpecificComics";
+import CharacterInfo from "./page/CharacterInfo";
 
 // Import de mes Components
 import Header from "./components/Header";
@@ -43,7 +44,10 @@ const App = () => {
           path="/comics/:characterId"
           element={<CharacterSpecificComics darkMode={darkMode} />}
         />
-        <Route />
+        <Route
+          path="/character/:characterId"
+          element={<CharacterInfo darkMode={darkMode} />}
+        />
         <Route />
       </Routes>
 

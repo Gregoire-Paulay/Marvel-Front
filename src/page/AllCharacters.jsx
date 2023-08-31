@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import notSpiderMan from "../assets/no-spiderman.jpg";
+
 const AllCharacters = ({ darkMode }) => {
   const [characters, setCharacters] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -102,7 +104,13 @@ const AllCharacters = ({ darkMode }) => {
                   "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ||
                 character.thumbnail.path ===
                   "http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708" ? (
-                  ""
+                  <img
+                    src={notSpiderMan}
+                    alt="Pas Spider-man"
+                    onClick={() => {
+                      navigate("/comics/" + character._id);
+                    }}
+                  />
                 ) : (
                   <img
                     src={
@@ -118,6 +126,13 @@ const AllCharacters = ({ darkMode }) => {
                 )}
 
                 <p>{character.name}</p>
+                <button
+                  onClick={() => {
+                    navigate("/character/" + character._id);
+                  }}
+                >
+                  Click for more info on character
+                </button>
                 {/* <p>{character.description}</p> */}
               </div>
             );
