@@ -11,6 +11,7 @@ const Header = ({ darkMode, handleMode }) => {
       <div className="container">
         <div>
           <img
+            className="header-logo"
             src={logo}
             alt="Logo Marvel"
             onClick={() => {
@@ -19,7 +20,7 @@ const Header = ({ darkMode, handleMode }) => {
           />
         </div>
 
-        <div>
+        <div className="navigation">
           <button
             onClick={() => {
               navigate("/allcomics");

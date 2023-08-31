@@ -23,7 +23,7 @@ const CharacterSpecificComics = ({ darkMode }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [characterId]);
 
   return isLoading ? (
     <span>En cours de chargement</span>

@@ -8,21 +8,35 @@ const AllComics = ({ darkMode }) => {
 
   const navigate = useNavigate();
 
+  // state pour gérer ma barre de recherche et pages
+  const [title, setTitle] = useState("");
+  const [skip, setSkip] = useState(0);
+  const [counter, setCounter] = useState(1);
+  const [pageTotal, setPageTotal] = useState();
+
+  let limit = 50;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/comics");
+        const response = await axios.get(
+          `http://localhost:3000/comics?title=${title}&skip=${skip}&limit=${limit}`
+        );
         const foundComics = response.data;
+        console.log(foundComics);
         setcomics(foundComics);
 
-        console.log(foundComics);
+        const NumberOfPage = Math.ceil(foundComics.count / foundComics.limit);
+        setPageTotal(NumberOfPage);
+        console.log(pageTotal);
+
         setIsLoading(false);
       } catch (error) {
         console.log(error.response);
       }
     };
     fetchData();
-  }, []);
+  }, [title, limit, skip, pageTotal]);
 
   return (
     <div>
@@ -31,19 +45,74 @@ const AllComics = ({ darkMode }) => {
       ) : (
         <main className={darkMode ? "dark" : "light"}>
           <div className="container">
-            <h1>Je suis sur la page Comics</h1>
-            {comics.results.map((comic, index) => {
-              return (
-                <div
-                  key={index}
-                  onClick={() => {
-                    navigate("/comic/" + comic._id);
-                  }}
-                >
-                  <p>{comic.title}</p>
+            <h1>Je suis sur la page tout les Comics</h1>
+            <input
+              className="search-comics"
+              type="text"
+              placeholder="X-men"
+              onChange={(event) => {
+                setTitle(event.target.value);
+              }}
+            />
+
+            <section className="pagination">
+              <div>
+                <p>
+                  Page : {counter} / {pageTotal}
+                </p>
+                <div>
+                  <button
+                    onClick={() => {
+                      setCounter(counter - 1);
+                      setSkip(skip - limit);
+                    }}
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCounter(counter + 1);
+                      setSkip(skip + limit);
+                    }}
+                  >
+                    +
+                  </button>
                 </div>
-              );
-            })}
+              </div>
+
+              <div>
+                <label htmlFor="number">Go to page</label>
+                <input
+                  type="number"
+                  id="number"
+                  onChange={(event) => {
+                    setCounter(event.target.value);
+                    setSkip((event.target.value - 1) * limit);
+                  }}
+                />
+              </div>
+            </section>
+
+            <section className="all-comics">
+              {comics.results.map((comic, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      navigate("/comic/" + comic._id);
+                    }}
+                  >
+                    <img
+                      src={
+                        comic.thumbnail.path + "." + comic.thumbnail.extension
+                      }
+                      alt={comic.title}
+                    />
+                    <p>{comic.title}</p>
+                  </div>
+                );
+              })}
+            </section>
           </div>
         </main>
       )}

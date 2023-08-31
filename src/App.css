@@ -65,14 +65,82 @@ main {
 /* ------------------------------ */
 /* ----------- HEADER ----------- */
 /* ------------------------------ */
-header img {
-  width: 300px;
+.header-logo {
+  width: 200px;
   cursor: pointer;
+}
+header > div:first-of-type {
+  border: 2px solid pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding: 15px;
+}
+
+.navigation {
+  border: 2px solid orange;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
 /* ------------------------------ */
 /* ------------ MAIN ------------ */
 /* ------------------------------ */
 
+.pagination {
+  /* border: 2px solid red; */
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pagination > div:first-child {
+  /* border: 3px solid yellow; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+}
+.pagination > div > div {
+  /* border: 3px solid black; */
+  display: flex;
+  gap: 8px;
+}
+
+.pagination > div:last-child {
+  /* border: 2px solid gray; */
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+.pagination input {
+  width: 60px;
+}
+
+/* ------- PAGE ALLCOMICS ------- */
+.all-comics {
+  border: 3px solid blue;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.all-comics > div {
+  border: 3px solid green;
+  width: calc((100% - 100px) / 5);
+  cursor: pointer;
+}
+.all-comics img {
+  width: 100%;
+}
+
+.search-comics {
+  border: 3px solid brown;
+  position: absolute;
+  top: 50px;
+  width: 300px;
+}
 /* ----- PAGE ALLCHARACTERS ----- */
 .all-hero {
   /* border: 2px solid blue; */
@@ -83,13 +151,32 @@ header img {
 }
 
 .all-hero > div {
-  border: 1px solid red;
-  width: calc((100% - 100px) / 5);
+  border: 1px solid black;
+  border-radius: 6px;
+  width: calc((100% - 125px) / 6);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 .all-hero > div > img {
   width: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px 10px 3px #000000;
+  box-shadow: 5px 5px 10px 3px #000000;
 }
 
+.search-character {
+  border: 2px solid yellowgreen;
+  position: absolute;
+  top: 50px;
+  width: 300px;
+}
 /* ---- PAGE Character-Comics --- */
 .comics-character {
   padding: 30px;

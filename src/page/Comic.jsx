@@ -23,7 +23,7 @@ const Comic = ({ darkMode }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [comicId]);
 
   return isLoading ? (
     <span>Chargement ...</span>
