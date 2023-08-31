@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import comicImg from "../assets/Comics.jpg";
+
 const Comic = ({ darkMode }) => {
   const [comic, setComic] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -32,11 +34,25 @@ const Comic = ({ darkMode }) => {
       <div className="container">
         <h1>{comic.title}</h1>
         <div>
-          <img
-            src={comic.thumbnail.path + "." + comic.thumbnail.extension}
-            alt={comic.title}
-          />
-          <p>{comic.description}</p>
+          {comic.thumbnail.path ===
+          "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
+            <img src={comicImg} alt="Spider-Man 2" />
+          ) : (
+            <img
+              src={comic.thumbnail.path + "." + comic.thumbnail.extension}
+              alt={comic.title}
+            />
+          )}
+          {comic.description === null ? (
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
+              adipisci? Voluptas incidunt officia tempore nisi nam voluptatem
+              nobis corporis natus dolore provident sint quibusdam, libero
+              distinctio repellat? Maxime.
+            </p>
+          ) : (
+            <p>{comic.description}</p>
+          )}
         </div>
       </div>
     </main>

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import comicImg from "../assets/Comics.jpg";
+
 const AllComics = ({ darkMode }) => {
   const [comics, setcomics] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -46,14 +48,17 @@ const AllComics = ({ darkMode }) => {
         <main className={darkMode ? "dark" : "light"}>
           <div className="container">
             <h1>Je suis sur la page tout les Comics</h1>
-            <input
-              className="search-comics"
-              type="text"
-              placeholder="X-men"
-              onChange={(event) => {
-                setTitle(event.target.value);
-              }}
-            />
+
+            <div className="search">
+              <i className="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                placeholder="X-men"
+                onChange={(event) => {
+                  setTitle(event.target.value);
+                }}
+              />
+            </div>
 
             <section className="pagination">
               <div>
@@ -94,21 +99,27 @@ const AllComics = ({ darkMode }) => {
             </section>
 
             <section className="all-comics">
-              {comics.results.map((comic, index) => {
+              {comics.results.map((comic) => {
                 return (
                   <div
-                    key={index}
+                    key={comic._id}
                     onClick={() => {
                       navigate("/comic/" + comic._id);
                     }}
                   >
-                    <img
-                      src={
-                        comic.thumbnail.path + "." + comic.thumbnail.extension
-                      }
-                      alt={comic.title}
-                    />
-                    <p>{comic.title}</p>
+                    {comic.thumbnail.path ===
+                    "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
+                      <img src={comicImg} alt="Spider-Man 2" />
+                    ) : (
+                      <img
+                        src={
+                          comic.thumbnail.path + "." + comic.thumbnail.extension
+                        }
+                        alt={comic.title}
+                      />
+                    )}
+
+                    <h2>{comic.title}</h2>
                   </div>
                 );
               })}

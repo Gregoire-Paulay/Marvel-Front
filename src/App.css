@@ -11,7 +11,7 @@ body {
   margin: 0 auto;
   background-color: #f5f5f5;
   color: #111111;
-  border-radius: 8px;
+  border-radius: 30px;
   /* border: 1px solid red; */
 }
 .divider {
@@ -24,6 +24,11 @@ h1 {
   text-align: center;
   margin: 20px 0;
 }
+h2 {
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
 
 /* ------ Gestion light/dark mode ------ */
 .mode-dark {
@@ -34,9 +39,10 @@ h1 {
   font-size: 20px;
   color: white;
   background-color: var(--dark);
-  border: 1px solid white;
+  border: 3px solid orange;
   border-radius: 50%;
-  padding: 4px 8px;
+  padding: 8px 11px;
+  z-index: 1;
 }
 .mode-light {
   position: absolute;
@@ -47,9 +53,10 @@ h1 {
   font-size: 20px;
   color: black;
   background-color: white;
-  border: 1px solid var(--dark);
+  border: 3px solid orange;
   border-radius: 50%;
-  padding: 4px 8px;
+  padding: 8px 11px;
+  z-index: 1;
 }
 .dark {
   background-color: var(--dark);
@@ -66,23 +73,46 @@ main {
 /* ----------- HEADER ----------- */
 /* ------------------------------ */
 .header-logo {
-  width: 200px;
+  width: 250px;
   cursor: pointer;
+  z-index: 1;
+  position: relative;
 }
 header > div:first-of-type {
-  border: 2px solid pink;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 25px;
   padding: 15px;
+  position: relative;
 }
 
 .navigation {
-  border: 2px solid orange;
   display: flex;
   width: 100%;
   justify-content: space-around;
+  position: relative;
+  z-index: 1;
+}
+.banner {
+  position: absolute;
+  height: 100%;
+  z-index: 1;
+  width: 100%;
+  object-fit: cover;
+  top: 0;
+}
+
+.navigation button {
+  border: 3px solid orange;
+  padding: 8px 15px;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  width: 150px;
+  font-size: 17px;
+  cursor: pointer;
+  font-weight: bold;
 }
 /* ------------------------------ */
 /* ------------ MAIN ------------ */
@@ -119,6 +149,59 @@ header > div:first-of-type {
   width: 60px;
 }
 
+/* -----Barre de recherche -----*/
+.search {
+  border: 3px solid orange;
+  position: absolute;
+  top: 50px;
+  left: 15%;
+  margin-left: 50px;
+  width: 300px;
+  z-index: 1;
+  padding: 6px 15px;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search input {
+  background-color: black;
+  border: none;
+  width: 250px;
+  color: white;
+}
+
+/* ---------- PAGE HOME --------- */
+.home {
+  width: 100%;
+  position: relative;
+  height: 100vh;
+  border-radius: 30px;
+}
+
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(./assets/bg-home.jpg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px;
+}
+
+.paper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(./assets/paper.jpg);
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: lighten;
+  border-radius: 30px;
+}
+
 /* ------- PAGE ALLCOMICS ------- */
 .all-comics {
   border: 3px solid blue;
@@ -127,19 +210,22 @@ header > div:first-of-type {
   gap: 25px;
 }
 .all-comics > div {
-  border: 3px solid green;
+  border: 1px solid lightgray;
+  border-radius: 6px;
   width: calc((100% - 100px) / 5);
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px;
+  background-color: gray;
+  -webkit-box-shadow: 6px 6px 15px 3px #000000;
+  box-shadow: 6px 6px 15px 3px #000000;
 }
 .all-comics img {
   width: 100%;
-}
-
-.search-comics {
-  border: 3px solid brown;
-  position: absolute;
-  top: 50px;
-  width: 300px;
+  height: 300px;
+  object-fit: cover;
 }
 /* ----- PAGE ALLCHARACTERS ----- */
 .all-hero {
@@ -171,12 +257,6 @@ header > div:first-of-type {
   box-shadow: 5px 5px 10px 3px #000000;
 }
 
-.search-character {
-  border: 2px solid yellowgreen;
-  position: absolute;
-  top: 50px;
-  width: 300px;
-}
 /* ---- PAGE Character-Comics --- */
 .comics-character {
   padding: 30px;

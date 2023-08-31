@@ -50,14 +50,18 @@ const AllCharacters = ({ darkMode }) => {
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
         <h1>Je suis sur la Page All Characters</h1>
-        <input
-          className="search-character"
-          type="text"
-          placeholder="Spider-Man"
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-        />
+
+        <div className="search">
+          <i className="fa-solid fa-magnifying-glass"></i>
+          <input
+            className="search-character"
+            type="text"
+            placeholder="Spider-Man"
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
+          />
+        </div>
 
         <section className="pagination">
           <div>
