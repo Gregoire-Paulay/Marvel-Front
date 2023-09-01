@@ -2,7 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+// Import image pour remplacer les manquantes
 import notSpiderMan from "../assets/no-spiderman.jpg";
+import comicImg from "../assets/Comics.jpg";
 
 const CharacterSpecificComics = ({ darkMode }) => {
   const [comicsPerCharacter, setComicsPerCharacter] = useState();
@@ -35,17 +37,6 @@ const CharacterSpecificComics = ({ darkMode }) => {
         <div className="comics-character">
           <div>
             <h1>Comics ou le personnage {comicsPerCharacter.name} apparaît</h1>
-            {/* <img
-              src={
-                comicsPerCharacter.thumbnail.path +
-                "." +
-                comicsPerCharacter.thumbnail.extension
-              }
-              alt={comicsPerCharacter.name}
-              onClick={() => {
-                navigate("/character/" + comicsPerCharacter._id);
-              }}
-            /> */}
 
             {comicsPerCharacter.thumbnail.path ===
               "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ||
@@ -83,12 +74,19 @@ const CharacterSpecificComics = ({ darkMode }) => {
                   }}
                 >
                   <p>{comics.title}</p>
-                  <img
-                    src={
-                      comics.thumbnail.path + "." + comics.thumbnail.extension
-                    }
-                    alt={comics.title}
-                  />
+
+                  {comics.thumbnail.path ===
+                  "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
+                    <img src={comicImg} alt="Spider-Man 2" />
+                  ) : (
+                    <img
+                      src={
+                        comics.thumbnail.path + "." + comics.thumbnail.extension
+                      }
+                      alt={comics.title}
+                    />
+                  )}
+
                   {/* <p>{comics.description}</p> */}
                 </div>
               );

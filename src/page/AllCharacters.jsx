@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 import notSpiderMan from "../assets/no-spiderman.jpg";
 
 const AllCharacters = ({ darkMode }) => {
   const [characters, setCharacters] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [favorite, setFavorite] = useState([]);
 
   const navigate = useNavigate();
 
@@ -15,8 +17,7 @@ const AllCharacters = ({ darkMode }) => {
   const [skip, setSkip] = useState(0);
   const [counter, setCounter] = useState(1);
   const [pageTotal, setPageTotal] = useState();
-
-  let limit = 20;
+  let limit = 20; // nombre de personnages par pages
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +36,7 @@ const AllCharacters = ({ darkMode }) => {
           foundCharacters.count / foundCharacters.limit
         );
         setPageTotal(NumberOfPage);
-        console.log(pageTotal);
+        // console.log(pageTotal);
       } catch (error) {
         console.log(error.response);
       }
@@ -44,6 +45,20 @@ const AllCharacters = ({ darkMode }) => {
     fetchData();
   }, [name, skip, limit, pageTotal]);
 
+  // Gestion personnage Favori avec Cookie
+  const handleFavorite = (character) => {
+    const favoriteCopy = [...favorite];
+    favoriteCopy.push({ name: character.name });
+    setFavorite(favoriteCopy);
+    console.log("FAVORI ===>", favorite);
+    Cookies.set("FavoriteCharacter", JSON.stringify(favorite), {
+      expires: 15,
+    });
+  };
+  const favCharCookie = Cookies.get("FavoriteCharacter");
+  const parsed = JSON.parse(favCharCookie);
+  // console.log(parsed);
+
   return isLoading ? (
     <span>Chargement en cours</span>
   ) : (
@@ -51,7 +66,14 @@ const AllCharacters = ({ darkMode }) => {
       <div className="container">
         <h1>Je suis sur la Page All Characters</h1>
 
-        <div className="search">
+        {/* Test renvoi du cookie */}
+        <p>Test favori cookie</p>
+        {parsed.map((myfav, index) => {
+          // console.log(myfav);
+          return <p key={index}>{myfav.name}</p>;
+        })}
+
+        <section className="search">
           <i className="fa-solid fa-magnifying-glass"></i>
           <input
             className="search-character"
@@ -61,22 +83,23 @@ const AllCharacters = ({ darkMode }) => {
               setName(event.target.value);
             }}
           />
-        </div>
+        </section>
 
         <section className="pagination">
           <div>
+            <button
+              className={counter === 1 && "hidden"}
+              onClick={() => {
+                setCounter(counter - 1);
+                setSkip(skip - limit);
+              }}
+            >
+              -
+            </button>
             <p>
               Page : {counter} / {pageTotal}
             </p>
             <div>
-              <button
-                onClick={() => {
-                  setCounter(counter - 1);
-                  setSkip(skip - limit);
-                }}
-              >
-                -
-              </button>
               <button
                 onClick={() => {
                   setCounter(counter + 1);
@@ -93,7 +116,7 @@ const AllCharacters = ({ darkMode }) => {
               type="number"
               id="number"
               onChange={(event) => {
-                setCounter(event.target.value);
+                setCounter(Number(event.target.value));
                 setSkip((event.target.value - 1) * limit);
               }}
             />
@@ -137,6 +160,13 @@ const AllCharacters = ({ darkMode }) => {
                 >
                   Click for more info on character
                 </button>
+                <input
+                  type="checkbox"
+                  className="favorite"
+                  onClick={() => {
+                    handleFavorite(character);
+                  }}
+                ></input>
                 {/* <p>{character.description}</p> */}
               </div>
             );

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// Import image pour remplacer les manquantes
 import comicImg from "../assets/Comics.jpg";
 
 const AllComics = ({ darkMode }) => {
@@ -62,19 +63,21 @@ const AllComics = ({ darkMode }) => {
 
             <section className="pagination">
               <div>
+                <button
+                  className={counter === 1 && "hidden"}
+                  onClick={() => {
+                    setCounter(counter - 1);
+                    setSkip(skip - limit);
+                  }}
+                >
+                  -
+                </button>
                 <p>
                   Page : {counter} / {pageTotal}
                 </p>
                 <div>
                   <button
-                    onClick={() => {
-                      setCounter(counter - 1);
-                      setSkip(skip - limit);
-                    }}
-                  >
-                    -
-                  </button>
-                  <button
+                    // className={counter === pageTotal && "hidden"}
                     onClick={() => {
                       setCounter(counter + 1);
                       setSkip(skip + limit);
@@ -91,7 +94,7 @@ const AllComics = ({ darkMode }) => {
                   type="number"
                   id="number"
                   onChange={(event) => {
-                    setCounter(event.target.value);
+                    setCounter(Number(event.target.value));
                     setSkip((event.target.value - 1) * limit);
                   }}
                 />
