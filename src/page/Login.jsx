@@ -12,18 +12,28 @@ const Login = ({ darkMode, handleToken }) => {
     setChange(event.target.value);
   };
 
+  //   State qui gère le message d'erreur
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const fetchData = async () => {
       try {
+        setErrorMessage("");
         const response = await axios.post("http://localhost:3000/user/login", {
           email: email,
           password: password,
         });
         console.log(response.data);
         handleToken(response.data.token, response.data.account.username);
+        navigate("/");
       } catch (error) {
         console.log(error.response.data);
+        if (
+          error.response.data.message === "l'email ou mot de passe incorrecte"
+        ) {
+          setErrorMessage("Connexion non autorisé");
+        }
       }
     };
     fetchData();
@@ -32,14 +42,14 @@ const Login = ({ darkMode, handleToken }) => {
   return (
     <main className={darkMode ? "dark" : "light"}>
       <form
-        className="login"
+        className="sign-log"
         onSubmit={(event) => {
           handleSubmit(event);
         }}
       >
         <div>
           <h1>Formulaire de connexion</h1>
-          <div>
+          <div className="sign-log-input">
             <div>
               <label htmlFor="email">Email</label>
               <input
@@ -68,6 +78,9 @@ const Login = ({ darkMode, handleToken }) => {
             </div>
           </div>
 
+          {errorMessage && (
+            <p style={{ color: "red", margin: "8px" }}>{errorMessage}</p>
+          )}
           <button type="submit">Se Connecter</button>
           <p
             onClick={() => {

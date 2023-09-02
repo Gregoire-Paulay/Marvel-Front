@@ -33,20 +33,20 @@ const Header = ({ darkMode, handleMode, handleToken, token }) => {
             </button>
           </section>
         ) : (
-          <section className="sign-log">
+          <section className="header-sign-log">
             <button
               onClick={() => {
                 navigate("/signup");
               }}
             >
-              signup
+              S'inscrire
             </button>
             <button
               onClick={() => {
                 navigate("/login");
               }}
             >
-              login
+              Se connecter
             </button>
           </section>
         )}

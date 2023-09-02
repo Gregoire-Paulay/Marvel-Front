@@ -81,6 +81,7 @@ const AllCharacters = ({ darkMode }) => {
     // console.log("FAVORI ===>", favorite);
   };
 
+  //
   Cookies.set("FavoriteCharacter", JSON.stringify(favorite), {
     expires: 15,
   });
@@ -98,7 +99,7 @@ const AllCharacters = ({ darkMode }) => {
         <h1>Je suis sur la Page All Characters</h1>
 
         {/* Test renvoi du cookie */}
-        <p>Test favori cookie</p>
+        {/* <p>Test favori cookie</p>
         {favCharCookie
           ? JSON.parse(favCharCookie).map((myFav, index) => {
               // console.log(myFav);
@@ -109,57 +110,18 @@ const AllCharacters = ({ darkMode }) => {
                 </div>
               );
             })
-          : ""}
+          : ""} */}
         {/* Test renvoi du cookie */}
 
         <section className="search">
-          <i className="fa-solid fa-magnifying-glass"></i>
-          <input
-            className="search-character"
-            type="text"
-            placeholder="Spider-Man"
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          />
-        </section>
-
-        <section className="pagination">
           <div>
-            <button
-              className={counter === 1 ? "hidden" : ""}
-              onClick={() => {
-                setCounter(counter - 1);
-                setSkip(skip - limit);
-              }}
-            >
-              -
-            </button>
-            <p>
-              Page : {counter} / {pageTotal}
-            </p>
-            <div>
-              <button
-                className={counter === pageTotal ? "hidden" : ""}
-                onClick={() => {
-                  setCounter(counter + 1);
-                  setSkip(skip + limit);
-                }}
-              >
-                +
-              </button>
-            </div>
-          </div>
-          <div>
-            <label htmlFor="number">Go to page</label>
+            <i className="fa-solid fa-magnifying-glass"></i>
             <input
-              type="number"
-              id="number"
+              className="search-character"
+              type="text"
+              placeholder="Spider-Man"
               onChange={(event) => {
-                if (event.target.value > 0) {
-                  setCounter(Number(event.target.value));
-                  setSkip((event.target.value - 1) * limit);
-                }
+                setName(event.target.value);
               }}
             />
           </div>
@@ -215,6 +177,47 @@ const AllCharacters = ({ darkMode }) => {
               </div>
             );
           })}
+        </section>
+
+        <section className="pagination">
+          <div>
+            <button
+              className={counter === 1 ? "hidden" : ""}
+              onClick={() => {
+                setCounter(counter - 1);
+                setSkip(skip - limit);
+              }}
+            >
+              -
+            </button>
+            <p>
+              Page : {counter} / {pageTotal}
+            </p>
+            <div>
+              <button
+                className={counter === pageTotal ? "hidden" : ""}
+                onClick={() => {
+                  setCounter(counter + 1);
+                  setSkip(skip + limit);
+                }}
+              >
+                +
+              </button>
+            </div>
+          </div>
+          <div>
+            <label htmlFor="number">Go to page</label>
+            <input
+              type="number"
+              id="number"
+              onChange={(event) => {
+                if (event.target.value > 0 && event.target.value <= pageTotal) {
+                  setCounter(Number(event.target.value));
+                  setSkip((event.target.value - 1) * limit);
+                }
+              }}
+            />
+          </div>
         </section>
       </div>
     </main>

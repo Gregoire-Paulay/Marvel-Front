@@ -48,18 +48,60 @@ const AllComics = ({ darkMode }) => {
       ) : (
         <main className={darkMode ? "dark" : "light"}>
           <div className="container">
-            <h1>Je suis sur la page tout les Comics</h1>
+            <h1>Liste des Comics Marvel</h1>
 
-            <div className="search">
-              <i className="fa-solid fa-magnifying-glass"></i>
-              <input
-                type="text"
-                placeholder="X-men"
-                onChange={(event) => {
-                  setTitle(event.target.value);
-                }}
-              />
-            </div>
+            <section className="search">
+              <div>
+                <i className="fa-solid fa-magnifying-glass"></i>
+                <input
+                  type="text"
+                  placeholder="X-men"
+                  onChange={(event) => {
+                    setTitle(event.target.value);
+                  }}
+                />
+              </div>
+            </section>
+
+            <section className="all-comics">
+              {comics.results.map((comic) => {
+                return (
+                  <div key={comic._id}>
+                    {comic.thumbnail.path ===
+                    "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
+                      <img
+                        src={comicImg}
+                        alt="Spider-Man 2"
+                        onClick={() => {
+                          navigate("/comic/" + comic._id);
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={
+                          comic.thumbnail.path + "." + comic.thumbnail.extension
+                        }
+                        alt={comic.title}
+                        onClick={() => {
+                          navigate("/comic/" + comic._id);
+                        }}
+                      />
+                    )}
+
+                    <h2>{comic.title}</h2>
+
+                    <input
+                      type="checkbox"
+                      className="favorite"
+                      // checked={checkedState[index]}
+                      // onChange={() => {
+                      //   handleFavorite(character, index);
+                      // }}
+                    ></input>
+                  </div>
+                );
+              })}
+            </section>
 
             <section className="pagination">
               <div>
@@ -95,40 +137,16 @@ const AllComics = ({ darkMode }) => {
                   type="number"
                   id="number"
                   onChange={(event) => {
-                    if (event.target.value > 0) {
+                    if (
+                      event.target.value > 0 &&
+                      event.target.value <= pageTotal
+                    ) {
                       setCounter(Number(event.target.value));
                       setSkip((event.target.value - 1) * limit);
                     }
                   }}
                 />
               </div>
-            </section>
-
-            <section className="all-comics">
-              {comics.results.map((comic) => {
-                return (
-                  <div
-                    key={comic._id}
-                    onClick={() => {
-                      navigate("/comic/" + comic._id);
-                    }}
-                  >
-                    {comic.thumbnail.path ===
-                    "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
-                      <img src={comicImg} alt="Spider-Man 2" />
-                    ) : (
-                      <img
-                        src={
-                          comic.thumbnail.path + "." + comic.thumbnail.extension
-                        }
-                        alt={comic.title}
-                      />
-                    )}
-
-                    <h2>{comic.title}</h2>
-                  </div>
-                );
-              })}
             </section>
           </div>
         </main>

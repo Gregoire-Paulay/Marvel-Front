@@ -35,8 +35,6 @@ const CharacterInfo = ({ darkMode }) => {
   ) : (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
-        <h1>{character.name}</h1>
-
         <section className="character-info">
           <div>
             {character.thumbnail.path ===
@@ -63,6 +61,7 @@ const CharacterInfo = ({ darkMode }) => {
             )}
           </div>
           <div>
+            <h1>{character.name}</h1>
             {character.description === "" ? (
               <div>
                 <span>

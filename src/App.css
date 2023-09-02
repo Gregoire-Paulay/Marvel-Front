@@ -22,7 +22,7 @@ body {
 h1 {
   font-size: 34px;
   text-align: center;
-  margin: 20px 0;
+  padding: 30px 0;
 }
 h2 {
   font-size: 20px;
@@ -115,74 +115,37 @@ header > div:first-of-type {
   font-weight: bold;
 }
 
-.sign-log {
+.header-sign-log {
   z-index: 1;
+  display: flex;
+  gap: 15px;
+}
+.header-sign-log button {
+  padding: 5px 12px;
+  font-size: 15px;
+  color: white;
+  background-color: black;
+  border: 2px solid orange;
+  border-radius: 10px;
+  width: 130px;
+  cursor: pointer;
 }
 .disconnect {
   z-index: 1;
 }
+.disconnect button {
+  padding: 5px 12px;
+  font-size: 15px;
+  color: white;
+  background-color: black;
+  border: 2px solid red;
+  border-radius: 10px;
+  width: 160px;
+  cursor: pointer;
+}
 /* ------------------------------ */
 /* ------------ MAIN ------------ */
 /* ------------------------------ */
-
-.pagination {
-  /* border: 2px solid red; */
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.pagination > div:first-child {
-  /* border: 3px solid yellow; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 35px;
-}
-.pagination > div > div {
-  /* border: 3px solid black; */
-  display: flex;
-  gap: 8px;
-}
-
-.pagination > div:last-child {
-  /* border: 2px solid gray; */
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  justify-content: center;
-}
-.pagination input {
-  width: 60px;
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-/* -----Barre de recherche -----*/
-.search {
-  border: 3px solid orange;
-  position: absolute;
-  top: 50px;
-  left: 15%;
-  margin-left: 50px;
-  width: 300px;
-  z-index: 1;
-  padding: 6px 15px;
-  background-color: black;
-  color: white;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.search input {
-  background-color: black;
-  border: none;
-  width: 250px;
-  color: white;
-}
 
 /* ---------- PAGE HOME --------- */
 .home {
@@ -266,34 +229,126 @@ header > div:first-of-type {
   border-radius: 30px;
 }
 
+/* ---------- Pagination ----------- */
+
+.pagination {
+  margin-top: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pagination > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.pagination > div:last-child {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+.pagination input {
+  width: 70px;
+  border-radius: 6px;
+  padding: 3px 5px;
+}
+.pagination button {
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+/* -----Barre de recherche -----*/
+.search {
+  padding: 6px 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid black;
+}
+.search > div {
+  width: 300px;
+  background-color: black;
+  border: 2px solid lightgray;
+  padding: 6px 15px;
+  border-radius: 6px;
+}
+.search input {
+  background-color: black;
+  border: none;
+  width: 250px;
+  color: white;
+  padding: 5px 15px;
+}
+
 /* ------- PAGE ALLCOMICS ------- */
 .all-comics {
-  border: 3px solid blue;
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
+  overflow: hidden scroll;
+  height: 1200px;
+  padding: 15px;
+  border-bottom: 1px solid black;
+  background: url(./assets/bg-home.jpg);
+  background-position: center;
 }
 .all-comics > div {
   border: 1px solid lightgray;
   border-radius: 6px;
   width: calc((100% - 100px) / 5);
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 6px;
+  padding: 12px;
   background-color: gray;
   -webkit-box-shadow: 6px 6px 15px 3px #000000;
   box-shadow: 6px 6px 15px 3px #000000;
+  position: relative;
 }
+
 .all-comics img {
   width: 100%;
   height: 300px;
   object-fit: cover;
+  cursor: pointer;
+}
+.all-comics img:hover {
+  transform: scale(1.02);
+}
+
+/* ---------- PAGE COMIC ---------- */
+.comic-info {
+  padding: 15px 50px;
+  display: flex;
+  gap: 30px;
+}
+.comic-info img {
+  width: 40%;
+}
+.comic-info p {
+  border-top: 1px solid lightgray;
+  padding-top: 30px;
 }
 /* ----- PAGE ALLCHARACTERS ----- */
 .all-hero {
-  /* border: 2px solid blue; */
   padding: 30px;
   display: flex;
   flex-wrap: wrap;
@@ -311,7 +366,7 @@ header > div:first-of-type {
   padding: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 30px;
   position: relative;
@@ -328,24 +383,37 @@ header > div:first-of-type {
   box-shadow: 5px 5px 10px 3px #000000;
 }
 .all-hero > div > img:hover {
-  opacity: 0.8;
+  transform: scale(1.02);
 }
 
+.all-hero button {
+  background-color: #222222;
+  font-size: 15px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 3px #999;
+}
+
+.all-hero button:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(2px);
+}
 .favorite {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 2px;
+  right: 2px;
+  z-index: 2;
 }
+
 /* ---- PAGE Character-Comics --- */
-.comics-character {
-  padding: 30px;
-}
 
 .comics-character > div:first-of-type {
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
   align-items: center;
+  padding-bottom: 25px;
 }
 .comics-character > div:first-of-type img {
   border-radius: 50%;
@@ -354,50 +422,76 @@ header > div:first-of-type {
   aspect-ratio: 1;
   object-fit: cover;
 }
+.comics-character > div:first-of-type img:hover {
+  opacity: 0.9;
+}
 
 .comics-character > div:last-of-type {
-  border: 2px solid green;
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
   padding: 30px 5px;
+  background: url(./assets/bg-home.jpg);
+  background-position: center;
+  overflow: hidden scroll;
+  height: 850px;
 }
 
 .comics-character > div:last-of-type > div {
   width: calc((100% - 100px) / 5);
-  border: 1px solid pink;
+  border: 1px solid gray;
   cursor: pointer;
+  background-color: lightgray;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 360px;
+  border-radius: 5px;
 }
 .comics-character > div:last-of-type img {
   width: 100%;
 }
+.comics-character > div:last-of-type img:hover {
+  transform: scale(1.03);
+}
 
+.comics-character p {
+  font-size: 15px;
+  text-align: center;
+  font-weight: bold;
+}
 /* ---- PAGE Character-Info ---- */
 .character-info {
-  border: 3px solid brown;
   padding: 40px;
   display: flex;
   gap: 30px;
+  margin: 60px 0;
 }
 .character-info > div:first-of-type {
-  border: 2px solid green;
   width: 500px;
 }
 .character-info img {
   width: 500px;
   object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.character-info img:hover {
+  opacity: 0.9;
 }
 
 .character-info > div:last-child {
-  border: 3px solid blue;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 .character-info > div:last-child > div {
-  border: 1px solid coral;
-  padding: 6px;
+  padding: 9px;
   background-color: white;
   border-radius: 5px;
+  border: 1px solid lightgray;
 }
 .character-info span {
   font-size: 18px;
@@ -407,32 +501,69 @@ header > div:first-of-type {
   margin: 8px 0;
 }
 
-/* --------- PAGE SIGNUP -------- */
-.signup {
+/* ------ PAGE SIGNUP - LOGIN ----- */
+.sign-log {
   color: black;
   display: flex;
   justify-content: center;
 }
-.signup > div {
+.sign-log > div {
   background-color: white;
   width: 600px;
-  height: 300px;
+  margin-top: 80px;
+  margin-bottom: 250px;
   border: 1px solid lightgray;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sign-log input {
+  width: 200px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid lightgray;
+}
+.sign-log label {
+  width: 200px;
+}
+.sign-log button {
+  background-color: lightgreen;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px #999;
+}
+.sign-log button:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(4px);
 }
 
-/* --------- PAGE LOGIN -------- */
-.login {
-  color: black;
-  display: flex;
-  justify-content: center;
+.sign-log p {
+  margin-bottom: 15px;
+  color: gray;
+  cursor: pointer;
+  font-size: 14px;
 }
-.login > div {
-  background-color: white;
-  width: 600px;
-  height: 300px;
-  border: 1px solid lightgray;
-  border-radius: 15px;
+
+.sign-log-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.sign-log-input > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid lightgray;
+  gap: 50px;
 }
 
 /* --------- PAGE FAVORIS -------- */

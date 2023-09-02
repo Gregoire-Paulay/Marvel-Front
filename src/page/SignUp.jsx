@@ -56,14 +56,14 @@ const SignUp = ({ darkMode, handleToken }) => {
   return (
     <main className={darkMode ? "dark" : "light"}>
       <form
-        className="signup"
+        className="sign-log"
         onSubmit={(event) => {
           handleSubmit(event);
         }}
       >
         <div>
           <h1>Formulaire d'inscription</h1>
-          <div>
+          <div className="sign-log-input">
             <div>
               <label htmlFor="username">Nom d'utilisateur</label>
               <input
@@ -106,7 +106,9 @@ const SignUp = ({ darkMode, handleToken }) => {
             </div>
           </div>
 
-          {errorMessage && <p style={{ color: "red" }}> {errorMessage}</p>}
+          {errorMessage && (
+            <p style={{ color: "red", margin: "8px" }}> {errorMessage}</p>
+          )}
           <button type="submit">S'inscrire</button>
           <p
             onClick={() => {

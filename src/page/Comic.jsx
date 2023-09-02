@@ -32,8 +32,7 @@ const Comic = ({ darkMode }) => {
   ) : (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
-        <h1>{comic.title}</h1>
-        <div>
+        <section className="comic-info">
           {comic.thumbnail.path ===
           "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
             <img src={comicImg} alt="Spider-Man 2" />
@@ -43,17 +42,20 @@ const Comic = ({ darkMode }) => {
               alt={comic.title}
             />
           )}
-          {comic.description === null ? (
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-              adipisci? Voluptas incidunt officia tempore nisi nam voluptatem
-              nobis corporis natus dolore provident sint quibusdam, libero
-              distinctio repellat? Maxime.
-            </p>
-          ) : (
-            <p>{comic.description}</p>
-          )}
-        </div>
+          <div>
+            <h1>{comic.title}</h1>
+            {comic.description === null ? (
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
+                adipisci? Voluptas incidunt officia tempore nisi nam voluptatem
+                nobis corporis natus dolore provident sint quibusdam, libero
+                distinctio repellat? Maxime.
+              </p>
+            ) : (
+              <p>{comic.description}</p>
+            )}
+          </div>
+        </section>
       </div>
     </main>
   );
