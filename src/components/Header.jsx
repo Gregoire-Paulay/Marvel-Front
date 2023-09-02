@@ -21,6 +21,7 @@ const Header = ({ darkMode, handleMode, handleToken, token }) => {
             }}
           />
         </div>
+
         {token ? (
           <section className="disconnect">
             <button
@@ -65,14 +66,19 @@ const Header = ({ darkMode, handleMode, handleToken, token }) => {
           >
             Personnages
           </button>
-          <button>Favoris</button>
+          <button
+            onClick={() => {
+              navigate("/favorite");
+            }}
+          >
+            Favoris
+          </button>
         </section>
+
         <button
           className={darkMode ? "mode-dark" : "mode-light"}
           onClick={() => {
             handleMode(!darkMode);
-            // setDarkMode(!darkMode);
-            // Cookies.set("mode", darkMode, { expires: 15 });
           }}
         >
           <i className="fa-solid fa-sun"></i>

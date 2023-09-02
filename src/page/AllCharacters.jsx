@@ -8,7 +8,17 @@ import notSpiderMan from "../assets/no-spiderman.jpg";
 const AllCharacters = ({ darkMode }) => {
   const [characters, setCharacters] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [favorite, setFavorite] = useState([]);
+  const [favorite, setFavorite] = useState(
+    Cookies.get("FavoriteCharacter")
+      ? JSON.parse(Cookies.get("FavoriteCharacter"))
+      : []
+  );
+
+  const [checkedState, setCheckedState] = useState(
+    localStorage.getItem("CheckedChar")
+      ? JSON.parse(localStorage.getItem("CheckedChar"))
+      : new Array(1493).fill(false)
+  );
 
   const navigate = useNavigate();
 
@@ -26,10 +36,8 @@ const AllCharacters = ({ darkMode }) => {
           `http://localhost:3000/characters?name=${name}&skip=${skip}&limit=${limit}`
         );
         console.log(response.data);
-
         const foundCharacters = response.data;
         setCharacters(foundCharacters);
-
         setIsLoading(false);
 
         const NumberOfPage = Math.ceil(
@@ -46,18 +54,41 @@ const AllCharacters = ({ darkMode }) => {
   }, [name, skip, limit, pageTotal]);
 
   // Gestion personnage Favori avec Cookie
-  const handleFavorite = (character) => {
+  const handleFavorite = (character, position) => {
     const favoriteCopy = [...favorite];
-    favoriteCopy.push({ name: character.name });
+    const favoriteInCookie = favoriteCopy.find(
+      (element) => element.name === character.name
+    );
+    if (!favoriteInCookie) {
+      favoriteCopy.push({
+        name: character.name,
+        picture: character.thumbnail.path + "." + character.thumbnail.extension,
+      });
+    } else {
+      for (let i = 0; i < favoriteCopy.length; i++) {
+        if (favoriteInCookie.name === favoriteCopy[i].name) {
+          favoriteCopy.splice(i, 1);
+        }
+      }
+    }
+
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+    setCheckedState(updatedCheckedState);
+
     setFavorite(favoriteCopy);
-    console.log("FAVORI ===>", favorite);
-    Cookies.set("FavoriteCharacter", JSON.stringify(favorite), {
-      expires: 15,
-    });
+    // console.log("FAVORI ===>", favorite);
   };
+
+  Cookies.set("FavoriteCharacter", JSON.stringify(favorite), {
+    expires: 15,
+  });
   const favCharCookie = Cookies.get("FavoriteCharacter");
-  const parsed = JSON.parse(favCharCookie);
-  // console.log(parsed);
+
+  localStorage.setItem("CheckedChar", JSON.stringify(checkedState), {
+    expires: 15,
+  });
 
   return isLoading ? (
     <span>Chargement en cours</span>
@@ -68,10 +99,18 @@ const AllCharacters = ({ darkMode }) => {
 
         {/* Test renvoi du cookie */}
         <p>Test favori cookie</p>
-        {parsed.map((myfav, index) => {
-          // console.log(myfav);
-          return <p key={index}>{myfav.name}</p>;
-        })}
+        {favCharCookie
+          ? JSON.parse(favCharCookie).map((myFav, index) => {
+              // console.log(myFav);
+              return (
+                <div key={index} className="fav-char">
+                  <p>{myFav.name}</p>
+                  <img src={myFav.picture} alt="Character" />
+                </div>
+              );
+            })
+          : ""}
+        {/* Test renvoi du cookie */}
 
         <section className="search">
           <i className="fa-solid fa-magnifying-glass"></i>
@@ -127,7 +166,7 @@ const AllCharacters = ({ darkMode }) => {
         </section>
 
         <section className="all-hero">
-          {characters.results.map((character) => {
+          {characters.results.map((character, index) => {
             return (
               <div key={character._id}>
                 {character.thumbnail.path ===
@@ -163,11 +202,13 @@ const AllCharacters = ({ darkMode }) => {
                 >
                   Click for more info on character
                 </button>
+
                 <input
                   type="checkbox"
                   className="favorite"
-                  onClick={() => {
-                    handleFavorite(character);
+                  checked={checkedState[index]}
+                  onChange={() => {
+                    handleFavorite(character, index);
                   }}
                 ></input>
                 {/* <p>{character.description}</p> */}

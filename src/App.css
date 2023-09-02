@@ -435,6 +435,15 @@ header > div:first-of-type {
   border-radius: 15px;
 }
 
+/* --------- PAGE FAVORIS -------- */
+.fav-char {
+  display: flex;
+  flex-direction: column;
+}
+.fav-char img {
+  width: 150px;
+}
+
 /* ------------------------------ */
 /* ----------- FOOTER ----------- */
 /* ------------------------------ */

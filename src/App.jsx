@@ -12,6 +12,7 @@ import CharacterSpecificComics from "./page/CharacterSpecificComics";
 import CharacterInfo from "./page/CharacterInfo";
 import SignUp from "./page/SignUp";
 import Login from "./page/Login";
+import Favorite from "./page/Favorite";
 
 // Import de mes Components
 import Header from "./components/Header";
@@ -77,7 +78,10 @@ const App = () => {
           path="/login"
           element={<Login darkMode={darkMode} handleToken={handleToken} />}
         />
-        <Route />
+        <Route
+          path="/favorite"
+          element={<Favorite darkMode={darkMode} token={token} />}
+        />
       </Routes>
 
       <Footer darkMode={darkMode} />
