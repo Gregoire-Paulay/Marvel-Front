@@ -114,6 +114,13 @@ header > div:first-of-type {
   cursor: pointer;
   font-weight: bold;
 }
+
+.sign-log {
+  z-index: 1;
+}
+.disconnect {
+  z-index: 1;
+}
 /* ------------------------------ */
 /* ------------ MAIN ------------ */
 /* ------------------------------ */
@@ -399,12 +406,42 @@ header > div:first-of-type {
 .character-info p {
   margin: 8px 0;
 }
+
+/* --------- PAGE SIGNUP -------- */
+.signup {
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+.signup > div {
+  background-color: white;
+  width: 600px;
+  height: 300px;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+}
+
+/* --------- PAGE LOGIN -------- */
+.login {
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+.login > div {
+  background-color: white;
+  width: 600px;
+  height: 300px;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+}
+
 /* ------------------------------ */
 /* ----------- FOOTER ----------- */
 /* ------------------------------ */
 footer {
   padding: 30px;
   text-align: center;
+  border-top: 1px solid gray;
 }
 
 footer a {

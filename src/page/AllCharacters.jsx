@@ -88,7 +88,7 @@ const AllCharacters = ({ darkMode }) => {
         <section className="pagination">
           <div>
             <button
-              className={counter === 1 && "hidden"}
+              className={counter === 1 ? "hidden" : ""}
               onClick={() => {
                 setCounter(counter - 1);
                 setSkip(skip - limit);
@@ -101,6 +101,7 @@ const AllCharacters = ({ darkMode }) => {
             </p>
             <div>
               <button
+                className={counter === pageTotal ? "hidden" : ""}
                 onClick={() => {
                   setCounter(counter + 1);
                   setSkip(skip + limit);
@@ -116,8 +117,10 @@ const AllCharacters = ({ darkMode }) => {
               type="number"
               id="number"
               onChange={(event) => {
-                setCounter(Number(event.target.value));
-                setSkip((event.target.value - 1) * limit);
+                if (event.target.value > 0) {
+                  setCounter(Number(event.target.value));
+                  setSkip((event.target.value - 1) * limit);
+                }
               }}
             />
           </div>

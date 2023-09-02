@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo-marvel.png";
 import Banner from "../assets/Heroes.jpg";
 
-const Header = ({ darkMode, handleMode }) => {
+const Header = ({ darkMode, handleMode, handleToken, token }) => {
   const navigate = useNavigate();
 
   return (
@@ -21,8 +21,36 @@ const Header = ({ darkMode, handleMode }) => {
             }}
           />
         </div>
+        {token ? (
+          <section className="disconnect">
+            <button
+              onClick={() => {
+                handleToken(null);
+              }}
+            >
+              Se déconnecter
+            </button>
+          </section>
+        ) : (
+          <section className="sign-log">
+            <button
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              signup
+            </button>
+            <button
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              login
+            </button>
+          </section>
+        )}
 
-        <div className="navigation">
+        <section className="navigation">
           <button
             onClick={() => {
               navigate("/allcomics");
@@ -38,7 +66,7 @@ const Header = ({ darkMode, handleMode }) => {
             Personnages
           </button>
           <button>Favoris</button>
-        </div>
+        </section>
         <button
           className={darkMode ? "mode-dark" : "mode-light"}
           onClick={() => {

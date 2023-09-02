@@ -31,7 +31,7 @@ const AllComics = ({ darkMode }) => {
 
         const NumberOfPage = Math.ceil(foundComics.count / foundComics.limit);
         setPageTotal(NumberOfPage);
-        console.log(pageTotal);
+        // console.log(pageTotal);
 
         setIsLoading(false);
       } catch (error) {
@@ -64,7 +64,7 @@ const AllComics = ({ darkMode }) => {
             <section className="pagination">
               <div>
                 <button
-                  className={counter === 1 && "hidden"}
+                  className={counter === 1 ? "hidden" : ""}
                   onClick={() => {
                     setCounter(counter - 1);
                     setSkip(skip - limit);
@@ -78,6 +78,7 @@ const AllComics = ({ darkMode }) => {
                 <div>
                   <button
                     // className={counter === pageTotal && "hidden"}
+                    className={counter === pageTotal ? "hidden" : ""}
                     onClick={() => {
                       setCounter(counter + 1);
                       setSkip(skip + limit);
@@ -94,8 +95,10 @@ const AllComics = ({ darkMode }) => {
                   type="number"
                   id="number"
                   onChange={(event) => {
-                    setCounter(Number(event.target.value));
-                    setSkip((event.target.value - 1) * limit);
+                    if (event.target.value > 0) {
+                      setCounter(Number(event.target.value));
+                      setSkip((event.target.value - 1) * limit);
+                    }
                   }}
                 />
               </div>

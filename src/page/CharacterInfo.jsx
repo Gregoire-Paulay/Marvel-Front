@@ -80,7 +80,7 @@ const CharacterInfo = ({ darkMode }) => {
                   necessitatibus vitae placeat!
                 </p>
                 <span>
-                  Je vous ai dit que Spider-man est mon Héros Marvel préférer ?
+                  Je vous ai dit que Spider-man est mon Héros Marvel préféré ?
                 </span>
               </div>
             ) : (
