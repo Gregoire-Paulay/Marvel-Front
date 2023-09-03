@@ -7,13 +7,14 @@ import spiderComic from "../assets/Comics.jpg";
 const Favorite = ({ darkMode, token }) => {
   const favCharCookie = Cookies.get("FavoriteCharacter");
   const favComicsCookie = Cookies.get("FavoriteComics");
-  // const username = Cookies.get("username");
+  const username = Cookies.get("username");
 
   const navigate = useNavigate();
   return token ? (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
-        <h1>Mes favoris </h1>
+        {username ? <h1>Mes favoris ({username}) </h1> : <h1>Mes favoris </h1>}
+
         <section className="all-fav">
           <div>
             <h2>Personnages favoris</h2>
