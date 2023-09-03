@@ -41,7 +41,7 @@ const SignUp = ({ darkMode, handleToken }) => {
 
       console.log(response.data);
 
-      handleToken(response.data.token);
+      handleToken(response.data.token, response.data.account.username);
       navigate("/");
     } catch (error) {
       console.log(error.response.data);

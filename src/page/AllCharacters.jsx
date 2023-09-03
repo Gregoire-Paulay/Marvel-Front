@@ -61,7 +61,7 @@ const AllCharacters = ({ darkMode }) => {
     // console.log(character);
     const favoriteCopy = [...favorite];
     const favoriteInCookie = favoriteCopy.find(
-      (element) => element.name === character.name
+      (element) => element.id === character._id
     );
     if (!favoriteInCookie) {
       favoriteCopy.push({
@@ -72,7 +72,7 @@ const AllCharacters = ({ darkMode }) => {
       console.log(favoriteCopy);
     } else {
       for (let i = 0; i < favoriteCopy.length; i++) {
-        if (favoriteInCookie.name === favoriteCopy[i].name) {
+        if (favoriteInCookie.id === favoriteCopy[i].id) {
           favoriteCopy.splice(i, 1);
         }
       }

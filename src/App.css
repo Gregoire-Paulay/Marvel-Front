@@ -567,12 +567,89 @@ header > div:first-of-type {
 }
 
 /* --------- PAGE FAVORIS -------- */
+.all-fav {
+  /* border: 3px solid green; */
+  display: flex;
+  gap: 15px;
+  min-height: 800px;
+}
 .fav-char {
   display: flex;
+  flex-wrap: wrap;
+  /* border: 2px solid red; */
+  padding: 12px;
+  border-right: 1px solid black;
+  width: 100%;
+  height: 100%;
+  gap: 15px;
+}
+.fav-char > div {
+  /* border: 3px solid pink; */
+  width: calc((100% - 30px) / 3);
+  display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  height: 220px;
+  align-items: center;
+  padding: 9px;
+  background-color: lightgray;
+  border-radius: 8px;
 }
 .fav-char img {
   width: 150px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  -webkit-box-shadow: 4px 4px 10px 3px #000000;
+  box-shadow: 4px 4px 10px 3px #000000;
+}
+.fav-char img:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+.fav-char p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.fav-comics {
+  /* border: 2px solid blue; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 12px 12px 12px 0;
+}
+.fav-comics > div {
+  /* border: 3px solid pink; */
+  width: calc((100% - 30px) / 3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 330px;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: lightgray;
+  border-radius: 8px;
+}
+
+.fav-comics img {
+  width: 150px;
+  aspect-ratio: 0.6;
+  object-fit: cover;
+  border-radius: 8px;
+  -webkit-box-shadow: 4px 4px 10px 3px #000000;
+  box-shadow: 4px 4px 10px 3px #000000;
+}
+.fav-comics img:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+}
+.fav-comics p {
+  text-align: center;
+  font-weight: bold;
 }
 
 /* ------------------------------ */
