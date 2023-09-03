@@ -15,8 +15,11 @@ const CharacterInfo = ({ darkMode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // const response = await axios.get(
+        //   `http://localhost:3000/character/${characterId}`
+        // );
         const response = await axios.get(
-          `http://localhost:3000/character/${characterId}`
+          `https://site--marvel-back--hpyqm5px6d9r.code.run/character/${characterId}`
         );
         console.log(response.data);
         setCharacter(response.data);

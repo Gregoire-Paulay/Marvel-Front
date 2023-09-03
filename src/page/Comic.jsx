@@ -14,8 +14,11 @@ const Comic = ({ darkMode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // const response = await axios.get(
+        //   `http://localhost:3000/comic/${comicId}`
+        // );
         const response = await axios.get(
-          `http://localhost:3000/comic/${comicId}`
+          `https://site--marvel-back--hpyqm5px6d9r.code.run/comic/${comicId}`
         );
         console.log(response.data);
         setComic(response.data);

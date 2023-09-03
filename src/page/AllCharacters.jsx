@@ -8,19 +8,19 @@ import notSpiderMan from "../assets/no-spiderman.jpg";
 const AllCharacters = ({ darkMode }) => {
   const [characters, setCharacters] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  // State pour Gérer mes favoris
   const [favorite, setFavorite] = useState(
     Cookies.get("FavoriteCharacter")
       ? JSON.parse(Cookies.get("FavoriteCharacter"))
       : []
   );
-
   const [checkedState, setCheckedState] = useState(
     localStorage.getItem("CheckedChar")
       ? JSON.parse(localStorage.getItem("CheckedChar"))
       : new Array(1493).fill(false)
   );
-
-  const navigate = useNavigate();
 
   // state pour gérer ma barre de recherche et pages
   const [name, setName] = useState("");
@@ -32,8 +32,11 @@ const AllCharacters = ({ darkMode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // const response = await axios.get(
+        //   `http://localhost:3000/characters?name=${name}&skip=${skip}&limit=${limit}`
+        // );
         const response = await axios.get(
-          `http://localhost:3000/characters?name=${name}&skip=${skip}&limit=${limit}`
+          `https://site--marvel-back--hpyqm5px6d9r.code.run/characters?name=${name}&skip=${skip}&limit=${limit}`
         );
         console.log(response.data);
         const foundCharacters = response.data;
@@ -53,8 +56,9 @@ const AllCharacters = ({ darkMode }) => {
     fetchData();
   }, [name, skip, limit, pageTotal]);
 
-  // Gestion personnage Favori avec Cookie
+  // Gestion personnage Favori avec Cookie + LocalStorage
   const handleFavorite = (character, position) => {
+    // console.log(character);
     const favoriteCopy = [...favorite];
     const favoriteInCookie = favoriteCopy.find(
       (element) => element.name === character.name
@@ -63,7 +67,9 @@ const AllCharacters = ({ darkMode }) => {
       favoriteCopy.push({
         name: character.name,
         picture: character.thumbnail.path + "." + character.thumbnail.extension,
+        id: character._id,
       });
+      console.log(favoriteCopy);
     } else {
       for (let i = 0; i < favoriteCopy.length; i++) {
         if (favoriteInCookie.name === favoriteCopy[i].name) {
@@ -78,14 +84,12 @@ const AllCharacters = ({ darkMode }) => {
     setCheckedState(updatedCheckedState);
 
     setFavorite(favoriteCopy);
-    // console.log("FAVORI ===>", favorite);
   };
 
-  //
   Cookies.set("FavoriteCharacter", JSON.stringify(favorite), {
     expires: 15,
   });
-  const favCharCookie = Cookies.get("FavoriteCharacter");
+  // console.log("FAVORI ===>", favorite);
 
   localStorage.setItem("CheckedChar", JSON.stringify(checkedState), {
     expires: 15,

@@ -20,10 +20,18 @@ const Login = ({ darkMode, handleToken }) => {
     const fetchData = async () => {
       try {
         setErrorMessage("");
-        const response = await axios.post("http://localhost:3000/user/login", {
-          email: email,
-          password: password,
-        });
+        // const response = await axios.post("http://localhost:3000/user/login", {
+        //   email: email,
+        //   password: password,
+        // });
+        const response = await axios.post(
+          "https://site--marvel-back--hpyqm5px6d9r.code.run/user/login",
+          {
+            email: email,
+            password: password,
+          }
+        );
+
         console.log(response.data);
         handleToken(response.data.token, response.data.account.username);
         navigate("/");
