@@ -63,6 +63,7 @@ const CharacterInfo = ({ darkMode }) => {
               />
             )}
           </div>
+
           <div>
             <h1>{character.name}</h1>
             {character.description === "" ? (

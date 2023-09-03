@@ -45,7 +45,6 @@ const AllComics = ({ darkMode }) => {
 
         const NumberOfPage = Math.ceil(foundComics.count / foundComics.limit);
         setPageTotal(NumberOfPage);
-        // console.log(pageTotal);
 
         setIsLoading(false);
       } catch (error) {
@@ -172,7 +171,6 @@ const AllComics = ({ darkMode }) => {
                 </p>
                 <div>
                   <button
-                    // className={counter === pageTotal && "hidden"}
                     className={counter === pageTotal ? "hidden" : ""}
                     onClick={() => {
                       setCounter(counter + 1);

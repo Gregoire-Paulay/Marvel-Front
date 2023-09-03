@@ -69,7 +69,7 @@ const AllCharacters = ({ darkMode }) => {
         picture: character.thumbnail.path + "." + character.thumbnail.extension,
         id: character._id,
       });
-      console.log(favoriteCopy);
+      // console.log(favoriteCopy);
     } else {
       for (let i = 0; i < favoriteCopy.length; i++) {
         if (favoriteInCookie.id === favoriteCopy[i].id) {
@@ -90,7 +90,6 @@ const AllCharacters = ({ darkMode }) => {
     expires: 15,
   });
   // console.log("FAVORI ===>", favorite);
-
   localStorage.setItem("CheckedChar", JSON.stringify(checkedState), {
     expires: 15,
   });

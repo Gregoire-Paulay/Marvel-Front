@@ -10,7 +10,6 @@ const Favorite = ({ darkMode, token }) => {
   // const username = Cookies.get("username");
 
   const navigate = useNavigate();
-  // {username ? { username } : ""}
   return token ? (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
@@ -49,12 +48,13 @@ const Favorite = ({ darkMode, token }) => {
                 : ""}
             </div>
           </div>
+
           <div>
             <h2>Comics favoris</h2>
             <div className="fav-comics">
               {favComicsCookie
                 ? JSON.parse(favComicsCookie).map((myFav) => {
-                    console.log("COMICS", myFav);
+                    // console.log("COMICS", myFav);
                     return (
                       <div key={myFav.id}>
                         <p>{myFav.title}</p>
