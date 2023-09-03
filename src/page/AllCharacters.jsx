@@ -100,22 +100,7 @@ const AllCharacters = ({ darkMode }) => {
   ) : (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
-        <h1>Je suis sur la Page All Characters</h1>
-
-        {/* Test renvoi du cookie */}
-        {/* <p>Test favori cookie</p>
-        {favCharCookie
-          ? JSON.parse(favCharCookie).map((myFav, index) => {
-              // console.log(myFav);
-              return (
-                <div key={index} className="fav-char">
-                  <p>{myFav.name}</p>
-                  <img src={myFav.picture} alt="Character" />
-                </div>
-              );
-            })
-          : ""} */}
-        {/* Test renvoi du cookie */}
+        <h1>Liste des personnages Marvel</h1>
 
         <section className="search">
           <div>
