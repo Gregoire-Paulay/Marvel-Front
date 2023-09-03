@@ -573,6 +573,9 @@ header > div:first-of-type {
   gap: 15px;
   min-height: 800px;
 }
+.all-fav > div {
+  width: 50%;
+}
 .fav-char {
   display: flex;
   flex-wrap: wrap;

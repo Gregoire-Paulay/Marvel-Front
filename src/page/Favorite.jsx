@@ -11,7 +11,7 @@ const Favorite = ({ darkMode, token }) => {
   return token ? (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
-        <h1>Mes favoris ({username})</h1>
+        <h1>Mes favoris {username ? { username } : ""}</h1>
         <section className="all-fav">
           <div>
             <h2>Personnages favoris</h2>
