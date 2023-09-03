@@ -451,7 +451,7 @@ header > div:first-of-type {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* height: 360px; */
+  height: 360px;
   border-radius: 5px;
 }
 .comics-character > div:last-of-type img {
@@ -802,7 +802,7 @@ footer a {
     width: 100%;
   }
   .character-info img {
-    width: 90%;
+    width: 100%;
   }
 
   .comics-character > div:last-of-type > div {
@@ -840,8 +840,9 @@ footer a {
   }
   .comics-character > div:last-of-type > div {
     width: 90%;
+    height: 650px;
   }
   .comics-character > div:last-of-type img {
-    height: 500px;
+    height: 90%;
   }
 }
