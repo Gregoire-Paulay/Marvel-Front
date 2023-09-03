@@ -1,7 +1,7 @@
 // Import de mes images pour mon slider
 import avengers from "../assets/Avengers-endgame.jpg";
 import spiderman from "../assets/spiderman-film.jpg";
-import loki from "../assets/loki.jpg";
+import loki from "../assets/Loki.jpg";
 import capMarvel from "../assets/Captain-Marvel.jpg";
 import marvelSnap from "../assets/marvel-snap.jpg";
 
