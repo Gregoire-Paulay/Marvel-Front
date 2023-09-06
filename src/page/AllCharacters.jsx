@@ -16,11 +16,6 @@ const AllCharacters = ({ darkMode }) => {
       ? JSON.parse(Cookies.get("FavoriteCharacter"))
       : []
   );
-  const [checkedState, setCheckedState] = useState(
-    localStorage.getItem("CheckedChar")
-      ? JSON.parse(localStorage.getItem("CheckedChar"))
-      : new Array(1493).fill(false)
-  );
 
   // state pour gérer ma barre de recherche et pages
   const [name, setName] = useState("");
@@ -57,7 +52,7 @@ const AllCharacters = ({ darkMode }) => {
   }, [name, skip, limit, pageTotal]);
 
   // Gestion personnage Favori avec Cookie + LocalStorage
-  const handleFavorite = (character, position) => {
+  const handleFavorite = (character) => {
     // console.log(character);
     const favoriteCopy = [...favorite];
     const favoriteInCookie = favoriteCopy.find(
@@ -78,21 +73,22 @@ const AllCharacters = ({ darkMode }) => {
       }
     }
 
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-    setCheckedState(updatedCheckedState);
-
     setFavorite(favoriteCopy);
+  };
+
+  const isFavorite = (characterId) => {
+    console.log(characterId);
+    const favoriteCopy = [...favorite];
+    const favoriteInCookie = favoriteCopy.find(
+      (element) => element.id === characterId
+    );
+    return favoriteInCookie;
   };
 
   Cookies.set("FavoriteCharacter", JSON.stringify(favorite), {
     expires: 15,
   });
   // console.log("FAVORI ===>", favorite);
-  localStorage.setItem("CheckedChar", JSON.stringify(checkedState), {
-    expires: 15,
-  });
 
   return isLoading ? (
     <span>Chargement en cours</span>
@@ -153,14 +149,16 @@ const AllCharacters = ({ darkMode }) => {
                   Click for more info on character
                 </button>
 
-                <input
-                  type="checkbox"
+                <button
                   className="favorite"
-                  checked={checkedState[index]}
-                  onChange={() => {
+                  onClick={() => {
                     handleFavorite(character, index);
                   }}
-                ></input>
+                >
+                  {isFavorite(character._id)
+                    ? "Supprimer des favoris"
+                    : "Ajouter aux favoris"}
+                </button>
                 {/* <p>{character.description}</p> */}
               </div>
             );

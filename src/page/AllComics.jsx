@@ -17,11 +17,6 @@ const AllComics = ({ darkMode }) => {
       ? JSON.parse(Cookies.get("FavoriteComics"))
       : []
   );
-  const [checkedState, setCheckedState] = useState(
-    localStorage.getItem("CheckedComics")
-      ? JSON.parse(localStorage.getItem("CheckedComics"))
-      : new Array(47397).fill(false)
-  );
 
   // state pour gérer ma barre de recherche et pages
   const [title, setTitle] = useState("");
@@ -55,7 +50,7 @@ const AllComics = ({ darkMode }) => {
   }, [title, limit, skip, pageTotal]);
 
   // Gestion personnage Favori avec Cookie + LocalStorage
-  const handleFavorite = (comic, position) => {
+  const handleFavorite = (comic) => {
     // console.log("comic", comic);
     const favoriteCopy = [...favorite];
     const favoriteInCookie = favoriteCopy.find(
@@ -78,20 +73,21 @@ const AllComics = ({ darkMode }) => {
       }
     }
 
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-    setCheckedState(updatedCheckedState);
     setFavorite(favoriteCopy);
+  };
+
+  const isFavorite = (comicId) => {
+    const favoriteCopy = [...favorite];
+    const favoriteInCookie = favoriteCopy.find(
+      (element) => element.id === comicId
+    );
+    return favoriteInCookie;
   };
 
   Cookies.set("FavoriteComics", JSON.stringify(favorite), {
     expires: 15,
   });
   // console.log("FAVORI ===>", favorite);
-  localStorage.setItem("CheckedComics", JSON.stringify(checkedState), {
-    expires: 15,
-  });
 
   return (
     <div>
@@ -142,14 +138,17 @@ const AllComics = ({ darkMode }) => {
 
                     <h2>{comic.title}</h2>
 
-                    <input
-                      type="checkbox"
+                    <button
                       className="favorite"
-                      checked={checkedState[index]}
-                      onChange={() => {
+                      onClick={() => {
                         handleFavorite(comic, index);
+                        console.log(comic._id);
                       }}
-                    ></input>
+                    >
+                      {isFavorite(comic._id)
+                        ? "Supprimer des favoris"
+                        : "Ajouter aux favoris"}
+                    </button>
                   </div>
                 );
               })}
