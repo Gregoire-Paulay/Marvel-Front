@@ -10,8 +10,7 @@ const Header = ({ darkMode, handleMode, handleToken, token }) => {
   return (
     <header className={darkMode ? "dark" : "light"}>
       <div className="container">
-        <img src={Banner} alt="Header-Banner" className="banner" />
-        <div>
+        <div className="header-nav">
           <img
             className="header-logo"
             src={logo}
@@ -20,60 +19,60 @@ const Header = ({ darkMode, handleMode, handleToken, token }) => {
               navigate("/");
             }}
           />
+
+          <section className="navigation">
+            <button
+              onClick={() => {
+                navigate("/allcomics");
+              }}
+            >
+              Comics
+            </button>
+            <button
+              onClick={() => {
+                navigate("/characters");
+              }}
+            >
+              Personnages
+            </button>
+            <button
+              onClick={() => {
+                navigate("/favorite");
+              }}
+            >
+              Favoris
+            </button>
+          </section>
+
+          {token ? (
+            <section className="disconnect">
+              <button
+                onClick={() => {
+                  handleToken(null);
+                }}
+              >
+                Se déconnecter
+              </button>
+            </section>
+          ) : (
+            <section className="header-sign-log">
+              <button
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                S'inscrire
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Se connecter
+              </button>
+            </section>
+          )}
         </div>
-
-        {token ? (
-          <section className="disconnect">
-            <button
-              onClick={() => {
-                handleToken(null);
-              }}
-            >
-              Se déconnecter
-            </button>
-          </section>
-        ) : (
-          <section className="header-sign-log">
-            <button
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
-              S'inscrire
-            </button>
-            <button
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Se connecter
-            </button>
-          </section>
-        )}
-
-        <section className="navigation">
-          <button
-            onClick={() => {
-              navigate("/allcomics");
-            }}
-          >
-            Comics
-          </button>
-          <button
-            onClick={() => {
-              navigate("/characters");
-            }}
-          >
-            Personnages
-          </button>
-          <button
-            onClick={() => {
-              navigate("/favorite");
-            }}
-          >
-            Favoris
-          </button>
-        </section>
 
         <button
           className={darkMode ? "mode-dark" : "mode-light"}
