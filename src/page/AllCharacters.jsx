@@ -54,7 +54,7 @@ const AllCharacters = ({ darkMode }) => {
     fetchData();
   }, [name, skip, limit, pageTotal]);
 
-  // Gestion personnage Favori avec Cookie + LocalStorage
+  // Gestion personnage Favori avec Cookie
   const handleFavorite = (character) => {
     // console.log(character);
     const favoriteCopy = [...favorite];
