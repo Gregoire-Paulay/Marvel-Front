@@ -2,9 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import RingLoader from "react-spinners/RingLoader";
 
-// Import image pour remplacer les manquantes
+// Image / Icones
 import comicImg from "../assets/Comics.jpg";
+
+// Components
+import Pagination from "../components/Pagination";
+import SearchBar from "../components/SearchBar";
 
 const AllComics = ({ darkMode }) => {
   const [comics, setcomics] = useState();
@@ -89,119 +94,77 @@ const AllComics = ({ darkMode }) => {
   });
   // console.log("FAVORI ===>", favorite);
 
+  if (isLoading)
+    return (
+      <div className="loading">
+        <RingLoader color="#ee171f" size={150} />
+      </div>
+    );
+
   return (
-    <div>
-      {isLoading ? (
-        <span>Chargement en cours</span>
-      ) : (
-        <main className={darkMode ? "dark" : "light"}>
-          <div className="container">
-            <h1>Liste des Comics Marvel</h1>
+    <main className={darkMode ? "dark" : "light"}>
+      <div className="container">
+        <h1>Liste des Comics Marvel</h1>
 
-            <section className="search">
-              <div>
-                <i className="fa-solid fa-magnifying-glass"></i>
-                <input
-                  type="text"
-                  placeholder="X-men"
-                  onChange={(event) => {
-                    setTitle(event.target.value);
-                  }}
-                />
-              </div>
-            </section>
+        <SearchBar
+          setName={setTitle}
+          setCounter={setCounter}
+          setSkip={setSkip}
+        />
 
-            <section className="all-comics">
-              {comics.results.map((comic, index) => {
-                return (
-                  <div key={comic._id}>
-                    {comic.thumbnail.path ===
-                    "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
-                      <img
-                        src={comicImg}
-                        alt="Spider-Man 2"
-                        onClick={() => {
-                          navigate("/comic/" + comic._id);
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={
-                          comic.thumbnail.path + "." + comic.thumbnail.extension
-                        }
-                        alt={comic.title}
-                        onClick={() => {
-                          navigate("/comic/" + comic._id);
-                        }}
-                      />
-                    )}
+        <section className="all-comics">
+          {comics.results.map((comic, index) => {
+            return (
+              <div key={comic._id}>
+                {comic.thumbnail.path ===
+                "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
+                  <img
+                    src={comicImg}
+                    alt="Spider-Man 2"
+                    onClick={() => {
+                      navigate("/comic/" + comic._id);
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={comic.thumbnail.path + "." + comic.thumbnail.extension}
+                    alt={comic.title}
+                    onClick={() => {
+                      navigate("/comic/" + comic._id);
+                    }}
+                  />
+                )}
 
-                    <h2>{comic.title}</h2>
+                <h2>{comic.title}</h2>
 
-                    <button
-                      className="favorite"
-                      onClick={() => {
-                        handleFavorite(comic, index);
-                        console.log(comic._id);
-                      }}
-                    >
-                      {isFavorite(comic._id)
-                        ? "Supprimer des favoris"
-                        : "Ajouter aux favoris"}
-                    </button>
-                  </div>
-                );
-              })}
-            </section>
-
-            <section className="pagination">
-              <div>
                 <button
-                  className={counter === 1 ? "hidden" : ""}
+                  className="favorite"
                   onClick={() => {
-                    setCounter(counter - 1);
-                    setSkip(skip - limit);
+                    handleFavorite(comic, index);
+                    console.log(comic._id);
                   }}
                 >
-                  -
+                  {isFavorite(comic._id) ? (
+                    <i className="fa-solid fa-heart"></i>
+                  ) : (
+                    <i className="fa-regular fa-heart"></i>
+                  )}
                 </button>
-                <p>
-                  Page : {counter} / {pageTotal}
-                </p>
-                <div>
-                  <button
-                    className={counter === pageTotal ? "hidden" : ""}
-                    onClick={() => {
-                      setCounter(counter + 1);
-                      setSkip(skip + limit);
-                    }}
-                  >
-                    +
-                  </button>
-                </div>
               </div>
+            );
+          })}
+        </section>
 
-              <div>
-                <label htmlFor="number">Go to page</label>
-                <input
-                  type="number"
-                  id="number"
-                  onChange={(event) => {
-                    if (
-                      event.target.value > 0 &&
-                      event.target.value <= pageTotal
-                    ) {
-                      setCounter(Number(event.target.value));
-                      setSkip((event.target.value - 1) * limit);
-                    }
-                  }}
-                />
-              </div>
-            </section>
-          </div>
-        </main>
-      )}
-    </div>
+        <Pagination
+          counter={counter}
+          setCounter={setCounter}
+          limit={limit}
+          skip={skip}
+          setSkip={setSkip}
+          pageTotal={pageTotal}
+        />
+      </div>
+    </main>
   );
 };
 

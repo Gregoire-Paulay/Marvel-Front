@@ -71,6 +71,13 @@ main {
   padding: 50px 0;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
+
 /* ------------------------------ */
 /* ----------- HEADER ----------- */
 /* ------------------------------ */
@@ -257,6 +264,26 @@ main {
   padding: 5px 15px;
 }
 
+/* ----- ADD/REMOVE FAVORITES ----- */
+.favorite {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 2;
+  border: none;
+  padding: 5px 6px;
+  border-radius: 50%;
+  background-color: var(--dark);
+}
+.favorite i {
+  color: var(--red);
+  font-size: 20px;
+}
+.favorite:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 /* ------- PAGE ALLCOMICS ------- */
 .all-comics {
   display: flex;
@@ -358,16 +385,6 @@ main {
 .all-hero button:active {
   box-shadow: 0 1px #666;
   transform: translateY(2px);
-}
-.favorite {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  z-index: 2;
-}
-.favorite:hover {
-  cursor: pointer;
-  transform: scale(1.1);
 }
 
 /* ---- PAGE Character-Comics --- */

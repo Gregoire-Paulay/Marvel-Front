@@ -2,8 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import RingLoader from "react-spinners/RingLoader";
 
+// Images
 import notSpiderMan from "../assets/no-spiderman.jpg";
+
+// Components
+import Pagination from "../components/Pagination";
+import SearchBar from "../components/SearchBar";
 
 const AllCharacters = ({ darkMode }) => {
   const [characters, setCharacters] = useState();
@@ -17,7 +23,7 @@ const AllCharacters = ({ darkMode }) => {
       : []
   );
 
-  // state pour gérer ma barre de recherche et pages
+  // Gestion barre de recherche et pages
   const [name, setName] = useState("");
   const [skip, setSkip] = useState(0);
   const [counter, setCounter] = useState(1);
@@ -27,9 +33,6 @@ const AllCharacters = ({ darkMode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get(
-        //   `http://localhost:3000/characters?name=${name}&skip=${skip}&limit=${limit}`
-        // );
         const response = await axios.get(
           `https://site--marvel-back--hpyqm5px6d9r.code.run/characters?name=${name}&skip=${skip}&limit=${limit}`
         );
@@ -90,26 +93,22 @@ const AllCharacters = ({ darkMode }) => {
   });
   // console.log("FAVORI ===>", favorite);
 
-  return isLoading ? (
-    <span>Chargement en cours</span>
-  ) : (
+  if (isLoading)
+    return (
+      <div className="loading">
+        <RingLoader color="#ee171f" size={150} />
+      </div>
+    );
+  return (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
         <h1>Liste des personnages Marvel</h1>
 
-        <section className="search">
-          <div>
-            <i className="fa-solid fa-magnifying-glass"></i>
-            <input
-              className="search-character"
-              type="text"
-              placeholder="Spider-Man"
-              onChange={(event) => {
-                setName(event.target.value);
-              }}
-            />
-          </div>
-        </section>
+        <SearchBar
+          setName={setName}
+          setCounter={setCounter}
+          setSkip={setSkip}
+        />
 
         <section className="all-hero">
           {characters.results.map((character, index) => {
@@ -159,52 +158,19 @@ const AllCharacters = ({ darkMode }) => {
                     ? "Supprimer des favoris"
                     : "Ajouter aux favoris"}
                 </button>
-                {/* <p>{character.description}</p> */}
               </div>
             );
           })}
         </section>
 
-        <section className="pagination">
-          <div>
-            <button
-              className={counter === 1 ? "hidden" : ""}
-              onClick={() => {
-                setCounter(counter - 1);
-                setSkip(skip - limit);
-              }}
-            >
-              -
-            </button>
-            <p>
-              Page : {counter} / {pageTotal}
-            </p>
-            <div>
-              <button
-                className={counter === pageTotal ? "hidden" : ""}
-                onClick={() => {
-                  setCounter(counter + 1);
-                  setSkip(skip + limit);
-                }}
-              >
-                +
-              </button>
-            </div>
-          </div>
-          <div>
-            <label htmlFor="number">Go to page</label>
-            <input
-              type="number"
-              id="number"
-              onChange={(event) => {
-                if (event.target.value > 0 && event.target.value <= pageTotal) {
-                  setCounter(Number(event.target.value));
-                  setSkip((event.target.value - 1) * limit);
-                }
-              }}
-            />
-          </div>
-        </section>
+        <Pagination
+          counter={counter}
+          setCounter={setCounter}
+          limit={limit}
+          skip={skip}
+          setSkip={setSkip}
+          pageTotal={pageTotal}
+        />
       </div>
     </main>
   );
