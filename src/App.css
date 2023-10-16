@@ -34,15 +34,15 @@ h2 {
 /* ------ Gestion light/dark mode ------ */
 .mode-dark {
   position: absolute;
-  top: 15px;
-  right: 30px;
+  top: 5px;
+  right: 10px;
   cursor: pointer;
   font-size: 20px;
   color: white;
-  background-color: var(--dark);
+  background-color: #333333;
   border: none;
   border-radius: 50%;
-  padding: 8px 11px;
+  padding: 6px 9px;
   z-index: 1;
 }
 .mode-light {
@@ -158,65 +158,14 @@ header .container {
 /* ------------------------------ */
 
 /* ---------- PAGE HOME --------- */
+main {
+  display: flex;
+  justify-content: center;
+}
 .home {
-  width: 100%;
+  width: 90%;
   position: relative;
   height: 100vh;
-}
-
-/* ---- Section Sliders ---- */
-.slider {
-  width: 90%;
-  margin: 30px auto;
-  position: relative;
-  margin-bottom: 80px;
-}
-.slider-viewport {
-  height: 400px;
-  overflow: hidden;
-}
-.slider-content {
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-transition: 1s all;
-  transition: 1s all;
-}
-.slider-content img {
-  width: 800px;
-  height: 400px;
-  object-fit: cover;
-}
-.slider-content img:hover {
-  opacity: 0.9;
-}
-.slider-nav {
-  position: absolute;
-  width: 100%;
-  bottom: -30px;
-  margin-top: 10px;
-  text-align: center;
-}
-.slider-nav a {
-  -webkit-box-shadow: 0px 0px 5px 0px gray;
-  box-shadow: 0px 0px 5px 0px gray;
-  display: inline-block;
-  background-color: #adafbc;
-  width: 15px;
-  height: 15px;
-  margin: 0 3px;
-}
-.slider-nav a:hover {
-  background-color: #fff;
-  -webkit-box-shadow: 0px 0px 5px 0px white;
-  box-shadow: 0px 0px 5px 0px white;
-}
-#img3:target .slider-content {
-  -webkit-transform: translateX(-1600px);
-  transform: translateX(-1600px);
-}
-#img5:target .slider-content {
-  -webkit-transform: translateX(-3200px);
-  transform: translateX(-3200px);
 }
 
 .bg {
