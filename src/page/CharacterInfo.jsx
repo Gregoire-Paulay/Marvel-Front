@@ -1,7 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import RingLoader from "react-spinners/RingLoader";
 
+// Image
 import notSpiderMan from "../assets/no-spiderman.jpg";
 
 const CharacterInfo = ({ darkMode }) => {
@@ -15,9 +17,6 @@ const CharacterInfo = ({ darkMode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get(
-        //   `http://localhost:3000/character/${characterId}`
-        // );
         const response = await axios.get(
           `https://site--marvel-back--hpyqm5px6d9r.code.run/character/${characterId}`
         );
@@ -33,9 +32,13 @@ const CharacterInfo = ({ darkMode }) => {
     fetchData();
   }, [characterId]);
 
-  return isLoading ? (
-    <span>Chargement ...</span>
-  ) : (
+  if (isLoading)
+    return (
+      <div className="loading">
+        <RingLoader color="#ee171f" size={150} />
+      </div>
+    );
+  return (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
         <section className="character-info">
@@ -68,10 +71,7 @@ const CharacterInfo = ({ darkMode }) => {
             <h1>{character.name}</h1>
             {character.description === "" ? (
               <div>
-                <span>
-                  C'est pas Spider-man donc il a pas besoin d'une vraie
-                  description :
-                </span>{" "}
+                <span>En attente de description :</span>
                 <p>
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia
                   cum atque, deleniti accusamus, minima libero culpa voluptates
@@ -82,9 +82,6 @@ const CharacterInfo = ({ darkMode }) => {
                   debitis. Incidunt doloribus repellendus sapiente itaque,
                   necessitatibus vitae placeat!
                 </p>
-                <span>
-                  Je vous ai dit que Spider-man est mon Héros Marvel préféré ?
-                </span>
               </div>
             ) : (
               <div>{character.description}</div>

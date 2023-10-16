@@ -68,7 +68,7 @@ h2 {
   color: var(--dark);
 }
 main {
-  padding: 50px 0;
+  padding: 80px 0;
 }
 
 .loading {
@@ -265,15 +265,16 @@ main {
 }
 
 /* ----- ADD/REMOVE FAVORITES ----- */
-.favorite {
+main .container .favorite {
   position: absolute;
   top: 2px;
   right: 2px;
   z-index: 2;
-  border: none;
   padding: 5px 6px;
-  border-radius: 50%;
+  border: 1px solid gray;
+  border-radius: 8px;
   background-color: var(--dark);
+  box-shadow: 0 0px;
 }
 .favorite i {
   color: var(--red);
@@ -290,11 +291,13 @@ main {
   flex-wrap: wrap;
   gap: 25px;
   overflow: hidden scroll;
-  height: 1200px;
+  min-height: 400px;
+  max-height: 1000px;
   padding: 15px;
   border-bottom: 1px solid black;
   background: url(./assets/bg-home.jpg);
   background-position: center;
+  width: 1200px;
 }
 .all-comics > div {
   border: 1px solid lightgray;
@@ -342,7 +345,10 @@ main {
   background: url(./assets/bg-home.jpg);
   background-position: center;
   overflow: hidden scroll;
-  height: 800px;
+  min-height: 400px;
+  max-height: 800px;
+  border: 3px solid blue;
+  width: 1200px;
 }
 
 .all-hero > div {
@@ -357,7 +363,7 @@ main {
   gap: 30px;
   position: relative;
   background-color: white;
-  box-shadow: 4px 4px 12px 3px white;
+  /* box-shadow: 4px 4px 12px 3px white; */
 }
 .all-hero > div > img {
   width: 100%;
@@ -367,6 +373,7 @@ main {
   cursor: pointer;
   -webkit-box-shadow: 5px 5px 10px 3px #000000;
   box-shadow: 5px 5px 10px 3px #000000;
+  margin-top: 5px;
 }
 .all-hero > div > img:hover {
   transform: scale(1.02);
@@ -388,6 +395,9 @@ main {
 }
 
 /* ---- PAGE Character-Comics --- */
+.comics-character {
+  width: 1200px;
+}
 
 .comics-character > div:first-of-type {
   display: flex;
@@ -414,7 +424,8 @@ main {
   background: url(./assets/bg-home.jpg);
   background-position: center;
   overflow: hidden scroll;
-  height: 850px;
+  min-height: 400px;
+  max-height: 1000px;
 }
 
 .comics-character > div:last-of-type > div {

@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import RingLoader from "react-spinners/RingLoader";
+
+// Image
 import comicImg from "../assets/Comics.jpg";
 
 const Comic = ({ darkMode }) => {
@@ -14,9 +17,6 @@ const Comic = ({ darkMode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get(
-        //   `http://localhost:3000/comic/${comicId}`
-        // );
         const response = await axios.get(
           `https://site--marvel-back--hpyqm5px6d9r.code.run/comic/${comicId}`
         );
@@ -30,9 +30,14 @@ const Comic = ({ darkMode }) => {
     fetchData();
   }, [comicId]);
 
-  return isLoading ? (
-    <span>Chargement ...</span>
-  ) : (
+  if (isLoading)
+    return (
+      <div className="loading">
+        <RingLoader color="#ee171f" size={150} />
+      </div>
+    );
+
+  return (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
         <section className="comic-info">
@@ -49,10 +54,18 @@ const Comic = ({ darkMode }) => {
             <h1>{comic.title}</h1>
             {comic.description === null ? (
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-                adipisci? Voluptas incidunt officia tempore nisi nam voluptatem
-                nobis corporis natus dolore provident sint quibusdam, libero
-                distinctio repellat? Maxime.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo
+                maxime, libero debitis repudiandae error quisquam fuga provident
+                natus, praesentium, dolor sapiente sit quaerat rem ea nisi totam
+                quod. Voluptate, dignissimos! Odio in doloremque, modi eaque cum
+                ea nam numquam error repellendus. Voluptatem dolorum eius
+                recusandae ullam ab necessitatibus, nobis modi praesentium
+                dignissimos perferendis, cumque est repellendus rem? Voluptas,
+                accusamus cumque! Accusamus magni, qui, dolorum blanditiis
+                perferendis illo corporis eius debitis laboriosam deserunt
+                fugiat laborum quae assumenda? Ex ea perferendis corrupti
+                distinctio! Libero esse quas totam reiciendis soluta beatae quod
+                suscipit.
               </p>
             ) : (
               <p>{comic.description}</p>

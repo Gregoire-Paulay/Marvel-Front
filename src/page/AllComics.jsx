@@ -4,7 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import RingLoader from "react-spinners/RingLoader";
 
-// Image / Icones
+// Image
 import comicImg from "../assets/Comics.jpg";
 
 // Components
@@ -141,7 +141,7 @@ const AllComics = ({ darkMode }) => {
                   className="favorite"
                   onClick={() => {
                     handleFavorite(comic, index);
-                    console.log(comic._id);
+                    // console.log(comic._id);
                   }}
                 >
                   {isFavorite(comic._id) ? (

@@ -148,7 +148,7 @@ const AllCharacters = ({ darkMode }) => {
                   Click for more info on character
                 </button>
 
-                <button
+                {/* <button
                   className="favorite"
                   onClick={() => {
                     handleFavorite(character, index);
@@ -157,6 +157,18 @@ const AllCharacters = ({ darkMode }) => {
                   {isFavorite(character._id)
                     ? "Supprimer des favoris"
                     : "Ajouter aux favoris"}
+                </button> */}
+                <button
+                  className="favorite"
+                  onClick={() => {
+                    handleFavorite(character, index);
+                  }}
+                >
+                  {isFavorite(character._id) ? (
+                    <i className="fa-solid fa-heart"></i>
+                  ) : (
+                    <i className="fa-regular fa-heart"></i>
+                  )}
                 </button>
               </div>
             );

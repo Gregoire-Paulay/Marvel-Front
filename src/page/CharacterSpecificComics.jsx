@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import RingLoader from "react-spinners/RingLoader";
 
 // Import image pour remplacer les manquantes
 import notSpiderMan from "../assets/no-spiderman.jpg";
@@ -32,9 +33,14 @@ const CharacterSpecificComics = ({ darkMode }) => {
     fetchData();
   }, [characterId]);
 
-  return isLoading ? (
-    <span>En cours de chargement</span>
-  ) : (
+  if (isLoading)
+    return (
+      <div className="loading">
+        <RingLoader color="#ee171f" size={150} />
+      </div>
+    );
+
+  return (
     <main className={darkMode ? "dark" : "light"}>
       <div className="container">
         <div className="comics-character">
