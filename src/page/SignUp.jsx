@@ -11,6 +11,7 @@ const SignUp = ({ darkMode, handleToken }) => {
   const [password, setPassword] = useState("");
   const handleChange = (event, setchange) => {
     setchange(event.target.value);
+    setErrorMessage("");
   };
 
   //   State qui gère le message d'erreur

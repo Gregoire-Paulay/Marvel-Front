@@ -90,7 +90,6 @@ main {
 }
 header .container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 25px;
   padding: 15px;
@@ -100,6 +99,7 @@ header .container {
 }
 
 .header-nav {
+  /* border: 5px solid blue; */
   width: 95%;
   display: flex;
   gap: 40px;
@@ -339,6 +339,7 @@ main .container .favorite {
 }
 /* ----- PAGE ALLCHARACTERS ----- */
 .all-hero {
+  /* border: 3px solid blue; */
   padding: 30px;
   display: flex;
   flex-wrap: wrap;
@@ -348,7 +349,6 @@ main .container .favorite {
   overflow: hidden scroll;
   min-height: 400px;
   max-height: 800px;
-  /* border: 3px solid blue; */
   width: 1200px;
 }
 
@@ -463,6 +463,7 @@ main .container .favorite {
   gap: 30px;
   margin: 60px 0;
   align-items: center;
+  min-height: 720px;
 }
 .character-info > div:first-of-type {
   width: 500px;
@@ -477,6 +478,7 @@ main .container .favorite {
 }
 .character-info img:hover {
   opacity: 0.9;
+  transform: scale(1.03);
 }
 
 .character-info > div:last-child {
@@ -508,12 +510,13 @@ main .container .favorite {
   background-color: white;
   width: 600px;
   margin-top: 80px;
-  margin-bottom: 250px;
+  margin-bottom: 280px;
   border: 1px solid lightgray;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 .sign-log input {
   width: 200px;
@@ -568,7 +571,7 @@ main .container .favorite {
   /* border: 3px solid green; */
   display: flex;
   gap: 15px;
-  min-height: 800px;
+  min-height: 600px;
   width: 1200px;
 }
 .all-fav > div {
@@ -671,32 +674,44 @@ footer a {
 /* ------------------------------ */
 /* -------- MEDIA QUERY --------- */
 /* ------------------------------ */
-@media (max-width: 1300px) {
-  .slider-content img {
-    width: 600px;
-    height: 300px;
-    object-fit: cover;
+@media (max-width: 1200px) {
+  .all-comics {
+    width: 900px;
   }
-  .slider-viewport {
-    height: 300px;
-    overflow: hidden;
+  .all-comics > div {
+    width: calc((100% - 50px) / 3);
   }
-  #img3:target .slider-content {
-    -webkit-transform: translateX(-1200px);
-    transform: translateX(-1200px);
+  .all-comics img {
+    height: 400px;
   }
-  #img5:target .slider-content {
-    -webkit-transform: translateX(-2400px);
-    transform: translateX(-2400px);
-  }
-}
-/* ------ MEDIA 1100PX WIDTH ------ */
 
-@media (max-width: 1100px) {
+  .all-hero {
+    width: 900px;
+  }
+  .all-hero > div {
+    width: calc((100% - 75px) / 4);
+  }
+  .comics-character {
+    width: 900px;
+  }
   .comics-character > div:last-of-type > div {
     width: calc((100% - 75px) / 4);
   }
 
+  .all-fav {
+    width: 900px;
+  }
+  .fav-char > div {
+    width: calc((100% - 15px) / 2);
+  }
+  .fav-comics > div {
+    width: calc((100% - 15px) / 2);
+  }
+}
+
+/* ------ MEDIA 1100PX WIDTH ------ */
+
+@media (max-width: 1100px) {
   .fav-char > div {
     width: calc((100% - 15px) / 2);
   }
@@ -708,96 +723,109 @@ footer a {
 /* ------ MEDIA 1000PX WIDTH ------ */
 
 @media (max-width: 1000px) {
-  .slider-content img {
-    width: 400px;
-    height: 200px;
-    object-fit: cover;
+  .header-nav {
+    flex-direction: column;
+    align-items: center;
   }
-  .slider-viewport {
-    height: 200px;
-    overflow: hidden;
+  .header-sign-log {
+    margin-right: 0;
   }
-  #img3:target .slider-content {
-    -webkit-transform: translateX(-800px);
-    transform: translateX(-800px);
-  }
-  #img5:target .slider-content {
-    -webkit-transform: translateX(-1600px);
-    transform: translateX(-1600px);
+  .disconnect {
+    margin-right: 0;
   }
 
+  .all-comics {
+    width: 700px;
+  }
   .all-comics > div {
-    width: calc((100% - 50px) / 3);
+    width: calc((100% - 25px) / 2);
   }
   .all-comics img {
+    height: 400px;
     object-fit: fill;
   }
-
-  .all-hero > div {
-    width: calc((100% - 75px) / 4);
+  .comic-info img {
+    width: 60%;
   }
 
   .character-info img {
-    width: 300px;
+    width: 350px;
   }
 }
 
 /* ------ MEDIA 900PX WIDTH ------ */
 
 @media (max-width: 900px) {
+  .all-hero {
+    width: 700px;
+  }
+  .all-hero > div {
+    width: calc((100% - 50px) / 3);
+  }
+
+  .comics-character {
+    width: 700px;
+  }
   .comics-character > div:last-of-type > div {
     width: calc((100% - 50px) / 3);
   }
 
-  .fav-comics > div {
+  .all-fav {
     width: 100%;
   }
+  .fav-comics > div {
+    width: 100%;
+    height: 500px;
+  }
   .fav-comics img {
-    width: 90%;
+    width: 85%;
+    height: 94%;
+    object-fit: fill;
   }
 }
 
 /* ------ MEDIA 700PX WIDTH ------ */
 
 @media (max-width: 700px) {
-  .slider-content img {
-    width: 300px;
-    height: 150px;
-    object-fit: cover;
-  }
-  .slider-viewport {
-    height: 150px;
-    overflow: hidden;
-  }
-  #img3:target .slider-content {
-    -webkit-transform: translateX(-600px);
-    transform: translateX(-600px);
-  }
-  #img5:target .slider-content {
-    -webkit-transform: translateX(-1200px);
-    transform: translateX(-1200px);
+  .home {
+    height: 70vh;
   }
 
-  .all-comics > div {
+  .all-comics {
+    width: 100%;
+  }
+  .comic-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  .comic-info img {
+    width: 70%;
+  }
+
+  .all-hero {
+    width: 100%;
+  }
+  .all-hero > div {
     width: calc((100% - 25px) / 2);
   }
 
-  .all-hero > div {
-    width: calc((100% - 50px) / 3);
+  .comics-character {
+    width: 100%;
+  }
+  .comics-character > div:last-of-type > div {
+    width: calc((100% - 25px) / 2);
   }
 
   .character-info {
     flex-direction: column;
+    gap: 10px;
   }
   .character-info > div:first-of-type {
-    width: 100%;
+    width: 75%;
   }
   .character-info img {
     width: 100%;
-  }
-
-  .comics-character > div:last-of-type > div {
-    width: calc((100% - 25px) / 2);
   }
 
   .fav-char > div {
@@ -807,33 +835,50 @@ footer a {
 
 /* ------ MEDIA 500PX WIDTH ------ */
 
-@media (max-width: 700px) {
-  .comic-info {
-    flex-direction: column;
-    align-items: center;
-  }
-  .comic-info img {
-    width: 70%;
+@media (max-width: 500px) {
+  .home {
+    height: 60vh;
   }
 
+  .all-comics > div {
+    width: 100%;
+  }
+  .all-comics img {
+    height: 450px;
+    object-fit: fill;
+  }
+  .sign-log > div {
+    border: 3px solid red;
+    width: 100%;
+  }
   .sign-log input {
-    width: 100px;
+    width: 120px;
   }
   .sign-log label {
-    width: 100px;
+    width: 120px;
   }
 
   .all-hero > div {
-    width: calc((100% - 25px) / 2);
+    width: 100%;
   }
   .comics-character > div:last-of-type {
     justify-content: center;
   }
   .comics-character > div:last-of-type > div {
     width: 90%;
-    height: 650px;
+    height: 550px;
+    justify-content: flex-start;
   }
   .comics-character > div:last-of-type img {
-    height: 90%;
+    height: 95%;
+    margin-top: 10px;
+  }
+
+  .fav-comics > div {
+    height: 350px;
+  }
+  .fav-comics img {
+    height: 85%;
+    width: 95%;
   }
 }

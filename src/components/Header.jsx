@@ -2,13 +2,12 @@ import { useNavigate } from "react-router-dom";
 
 //import d'image
 import logo from "../assets/logo-marvel.png";
-import Banner from "../assets/Heroes.jpg";
 
 const Header = ({ darkMode, handleMode, handleToken, token }) => {
   const navigate = useNavigate();
 
   return (
-    <header className={darkMode ? "dark" : "light"}>
+    <header className="dark">
       <div className="container">
         <div className="header-nav">
           <img

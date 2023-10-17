@@ -10,6 +10,7 @@ const Login = ({ darkMode, handleToken }) => {
   const [password, setPassword] = useState("");
   const handleChange = (event, setChange) => {
     setChange(event.target.value);
+    setErrorMessage("");
   };
 
   //   State qui gère le message d'erreur
@@ -20,10 +21,7 @@ const Login = ({ darkMode, handleToken }) => {
     const fetchData = async () => {
       try {
         setErrorMessage("");
-        // const response = await axios.post("http://localhost:3000/user/login", {
-        //   email: email,
-        //   password: password,
-        // });
+
         const response = await axios.post(
           "https://site--marvel-back--hpyqm5px6d9r.code.run/user/login",
           {
