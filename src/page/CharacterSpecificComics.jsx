@@ -17,9 +17,6 @@ const CharacterSpecificComics = ({ darkMode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get(
-        //   `http://localhost:3000/comics/${characterId}`
-        // );
         const response = await axios.get(
           `https://site--marvel-back--hpyqm5px6d9r.code.run/comics/${characterId}`
         );

@@ -23,14 +23,8 @@ const SignUp = ({ darkMode, handleToken }) => {
   };
   const fetchData = async () => {
     try {
-      //   Je fais disparaitre le message d'erreur
       setErrorMessage("");
 
-      // const response = await axios.post("http://localhost:3000/user/signup", {
-      //   username: username,
-      //   email: email,
-      //   password: password,
-      // });
       const response = await axios.post(
         "https://site--marvel-back--hpyqm5px6d9r.code.run/user/signup",
         {
